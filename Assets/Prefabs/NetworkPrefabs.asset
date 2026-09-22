@@ -19,10 +19,6 @@ MonoBehaviour:
   searchAllIfNoFolder: 1
   linkedNetworkPrefabs: []
   prefabs:
-  - guid: 8abbc307658c25747bd8ba70ecd82adf
-    prefab: {fileID: 8916751363479803742, guid: 8abbc307658c25747bd8ba70ecd82adf, type: 3}
-    pooled: 0
-    warmupCount: 5
   - guid: 06af95c593bb96149accd6b35eddd998
     prefab: {fileID: 3272328636267829030, guid: 06af95c593bb96149accd6b35eddd998, type: 3}
     pooled: 0
