@@ -58,8 +58,11 @@ public class Movement : NetworkBehaviour
         float targetAcceleration = 0f;
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S)) 
         { 
-            targetAcceleration = 1f; 
+            float target;
+            if (Input.GetKey(KeyCode.LeftShift)) target = 1.5f; else target = 1f;
+            targetAcceleration = target; 
         }
+        
         acceleration = Mathf.MoveTowards(acceleration, targetAcceleration, 4f * Time.deltaTime);
         // 2. Horizontal should ONLY trigger for Left/Right (A and D)
         float targetHorizontal = 0f;
