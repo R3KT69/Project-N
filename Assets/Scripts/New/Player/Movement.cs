@@ -13,10 +13,16 @@ public class Movement : NetworkBehaviour
     public float gravity = -25f;
     public bool toggle_gravity = false;
     public bool isGrounded = false;
-    public float yDelta;
     private float vertical_velocity;
 
     float acceleration, horizontal;
+
+
+    [Header("Ground Check Settings")]
+    public Transform feetTransform;
+    public float sphereRadius = 0.3f;
+    public LayerMask groundMask;
+    private static Collider[] groundHits = new Collider[10];
     
 
     public float raydist = 0.1f;
@@ -36,6 +42,8 @@ public class Movement : NetworkBehaviour
     void Update()
     {
         if (!isOwner) return;
+
+        
         
         Vector3 input_vector = Vector3.zero;
 
@@ -46,7 +54,6 @@ public class Movement : NetworkBehaviour
         if (Input.GetKey(KeyCode.D)) input_vector += Vector3.right; 
 
         // --- CALCULATE ANIMATOR PARAMETERS ---
-    
         // 1. Acceleration should ONLY trigger for Forward/Backward (W and S)
         float targetAcceleration = 0f;
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S)) 
@@ -54,7 +61,6 @@ public class Movement : NetworkBehaviour
             targetAcceleration = 1f; 
         }
         acceleration = Mathf.MoveTowards(acceleration, targetAcceleration, 4f * Time.deltaTime);
-
         // 2. Horizontal should ONLY trigger for Left/Right (A and D)
         float targetHorizontal = 0f;
         if (Input.GetKey(KeyCode.D)) targetHorizontal = 1f;
@@ -99,24 +105,18 @@ public class Movement : NetworkBehaviour
             controller.Move(movement_direction * movement_speed * Time.deltaTime);
         }
 
-        Vector3 origin = transform.position + new Vector3(0, -1f, 0); // !!!Must be placed at player's feet
-        isGrounded = Physics.Raycast(origin, Vector3.down, out RaycastHit hit, raydist);
+        CheckGroundStatus();
         //Debug.DrawRay(origin, Vector3.down * raydist, Color.white);
-        player_anim.SetBool("isGrounded", isGrounded);
+        
+
         if (isGrounded && vertical_velocity < 0f)
         {
-            vertical_velocity = 0f;
+            vertical_velocity = -1f; // simulating gravity constantly pushing the player towards the ground
         }
 
         if (!isGrounded && toggle_gravity)
         {
-            Debug.DrawRay(origin, Vector3.down * raydist, Color.red);
             vertical_velocity += gravity * Time.deltaTime;
-        }
-        else if (isGrounded)
-        {
-            Debug.DrawRay(origin, Vector3.down * raydist, Color.green);
-            yDelta = 0f;
         }
 
         controller.Move(new Vector3(0f, vertical_velocity * Time.deltaTime, 0f));
@@ -130,6 +130,26 @@ public class Movement : NetworkBehaviour
     private void RpcTriggerJump()
     {
         player_anim.SetTrigger("Jump");
+    }
+
+    bool GroundCheck(Transform feetTransform, float sphereRadius, LayerMask groundMask)
+    {
+        int hitCount = Physics.OverlapSphereNonAlloc(feetTransform.position, sphereRadius, groundHits, groundMask);
+        return hitCount > 0;
+    }
+
+    void CheckGroundStatus()
+    {
+        isGrounded = GroundCheck(feetTransform, sphereRadius, groundMask);
+        player_anim.SetBool("isGrounded", isGrounded);
+    }
+    
+    void OnDrawGizmos()
+    {
+        if (feetTransform == null) return;
+        bool grounded = GroundCheck(feetTransform, sphereRadius, groundMask);
+        Gizmos.color = grounded ? Color.green : Color.red;
+        Gizmos.DrawWireSphere(feetTransform.position, sphereRadius);
     }
 
     
