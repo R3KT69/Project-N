@@ -71,7 +71,7 @@ Transform:
   m_GameObject: {fileID: 642219542580642880}
   serializedVersion: 2
   m_LocalRotation: {x: -0.036752727, y: 0.5165482, z: 0.8531498, w: 0.06295009}
-  m_LocalPosition: {x: 0, y: 0.107, z: -0.002}
+  m_LocalPosition: {x: 0, y: 0.122, z: -0.002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 9140441594234819340}
   - component: {fileID: 330466920951828483}
   - component: {fileID: 8717486193695309986}
+  - component: {fileID: 8007324958105255804}
   m_Layer: 0
   m_Name: player_male
   m_TagString: Untagged
@@ -186,7 +187,7 @@ MonoBehaviour:
   toggle_gravity: 1
   isGrounded: 0
   feetTransform: {fileID: 677239525517383709}
-  sphereRadius: 0.16
+  sphereRadius: 0.28
   groundMask:
     serializedVersion: 2
     m_Bits: 64
@@ -246,9 +247,9 @@ CharacterController:
   m_Height: 1.8
   m_Radius: 0.22
   m_SlopeLimit: 45
-  m_StepOffset: 0
+  m_StepOffset: 0.35
   m_SkinWidth: 0.0001
-  m_MinMoveDistance: 0
+  m_MinMoveDistance: 0.01
   m_Center: {x: 0, y: -0.22, z: 0}
 --- !u!114 &8717486193695309986
 MonoBehaviour:
@@ -277,6 +278,29 @@ MonoBehaviour:
   _ownerAuth: 1
   _autoSyncParameters: 1
   _dontSyncParameters: []
+--- !u!136 &8007324958105255804
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3272328636267829030}
+  m_Material: {fileID: 13400000, guid: d8dc2a5ebcfdc294cb8dc24d28500742, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.25
+  m_Height: 1.81
+  m_Direction: 1
+  m_Center: {x: 0, y: -0.22, z: 0}
 --- !u!1 &6890774807727413388
 GameObject:
   m_ObjectHideFlags: 0

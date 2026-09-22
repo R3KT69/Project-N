@@ -111,7 +111,7 @@ public class Movement : NetworkBehaviour
 
         if (isGrounded && vertical_velocity < 0f)
         {
-            vertical_velocity = -1f; // simulating gravity constantly pushing the player towards the ground
+            vertical_velocity = -9.8f; // simulating gravity constantly pushing the player towards the ground
         }
 
         if (!isGrounded && toggle_gravity)
