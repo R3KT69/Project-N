@@ -7,15 +7,22 @@ public class Movement : NetworkBehaviour
     private Camera player_camera;
     public Transform character_model;
     public Animator player_anim;
-    public float movement_speed = 10;
-    public float rotation_speed = 10f;
-    public float jump_force = 10f;
+
+    [Header("Player Misc")]
+    [Range(1f, 10.0f)] public float movement_speed = 10;
+    [Range(1f, 10.0f)] public float default_speed = 9;
+    [Range(1f, 10.0f)] public float crouched_speed = 5;
+    [Range(1f, 10.0f)] public float sprint_speed = 12;
+    [Range(1f, 10.0f)] public float rotation_speed = 10f;
+    [Range(1f, 10.0f)] public float jump_force = 10f;
+    public bool isGrounded = false;
+    public bool isCrouched = false;
+
+    [Header("Physics setting")]
     public float gravity = -25f;
     public bool toggle_gravity = false;
-    public bool isGrounded = false;
     private float vertical_velocity;
-
-    float acceleration, horizontal;
+    public float acceleration, horizontal;
 
 
     [Header("Ground Check Settings")]
@@ -23,9 +30,7 @@ public class Movement : NetworkBehaviour
     public float sphereRadius = 0.3f;
     public LayerMask groundMask;
     private static Collider[] groundHits = new Collider[10];
-    
 
-    public float raydist = 0.1f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -37,14 +42,13 @@ public class Movement : NetworkBehaviour
             character_model = transform;
         }
     }
-    
+
+
     // Update is called once per frame
     void Update()
     {
         if (!isOwner) return;
 
-        
-        
         Vector3 input_vector = Vector3.zero;
 
         // --- input checks ---
@@ -53,19 +57,36 @@ public class Movement : NetworkBehaviour
         if (Input.GetKey(KeyCode.S)) input_vector += Vector3.back; 
         if (Input.GetKey(KeyCode.D)) input_vector += Vector3.right; 
 
+        bool isMoving = input_vector.sqrMagnitude > 0.01f;
+        movement_speed = isMoving ? GetTargetMoveSpeed() : 0f;
+
         // --- CALCULATE ANIMATOR PARAMETERS ---
-        // 1. Acceleration should ONLY trigger for Forward/Backward (W and S)
+
+        // Forward/Backward movement (acceleration)
         float targetAcceleration = 0f;
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S)) 
         { 
-            targetAcceleration = 1f; 
+            float target = 1f;
+            if (Input.GetKey(KeyCode.LeftShift) && !isCrouched)
+            {
+                target = 1.5f;
+            }
+            else if (isCrouched)
+            {
+                target = 1f;
+            }
+
+            targetAcceleration = target; 
         }
         acceleration = Mathf.MoveTowards(acceleration, targetAcceleration, 4f * Time.deltaTime);
-        // 2. Horizontal should ONLY trigger for Left/Right (A and D)
+
+
+        // Left/Right movement (horizontal)
         float targetHorizontal = 0f;
         if (Input.GetKey(KeyCode.D)) targetHorizontal = 1f;
         if (Input.GetKey(KeyCode.A)) targetHorizontal = -1f;
         horizontal = Mathf.MoveTowards(horizontal, targetHorizontal, 4f * Time.deltaTime);
+
 
         // --- Pass values to Animator ---
         player_anim.SetFloat("Acceleration", acceleration);
@@ -73,13 +94,20 @@ public class Movement : NetworkBehaviour
 
        
 
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !isCrouched)
         {
             vertical_velocity = jump_force;
             RpcTriggerJump();
         }
 
-        if (input_vector.sqrMagnitude > 0f)
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            isCrouched = !isCrouched;
+            player_anim.SetBool("isCrouched", isCrouched);
+            RpcTriggerCrouch();
+        }
+
+        if (input_vector.sqrMagnitude > 0.01f)
         {
             input_vector.Normalize();
 
@@ -111,7 +139,7 @@ public class Movement : NetworkBehaviour
 
         if (isGrounded && vertical_velocity < 0f)
         {
-            vertical_velocity = -1f; // simulating gravity constantly pushing the player towards the ground
+            vertical_velocity = -9.8f; // simulating gravity constantly pushing the player towards the ground
         }
 
         if (!isGrounded && toggle_gravity)
@@ -132,6 +160,12 @@ public class Movement : NetworkBehaviour
         player_anim.SetTrigger("Jump");
     }
 
+    [ObserversRpc]
+    private void RpcTriggerCrouch()
+    {
+        player_anim.SetTrigger("Crouch");
+    }
+
     bool GroundCheck(Transform feetTransform, float sphereRadius, LayerMask groundMask)
     {
         int hitCount = Physics.OverlapSphereNonAlloc(feetTransform.position, sphereRadius, groundHits, groundMask);
@@ -150,6 +184,21 @@ public class Movement : NetworkBehaviour
         bool grounded = GroundCheck(feetTransform, sphereRadius, groundMask);
         Gizmos.color = grounded ? Color.green : Color.red;
         Gizmos.DrawWireSphere(feetTransform.position, sphereRadius);
+    }
+
+    private float GetTargetMoveSpeed()
+    {
+        if (isCrouched)
+        {
+            return crouched_speed;
+        }
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            return sprint_speed;
+        }
+
+        return default_speed;
     }
 
     

@@ -71,7 +71,7 @@ Transform:
   m_GameObject: {fileID: 642219542580642880}
   serializedVersion: 2
   m_LocalRotation: {x: -0.036752727, y: 0.5165482, z: 0.8531498, w: 0.06295009}
-  m_LocalPosition: {x: 0, y: 0.107, z: -0.002}
+  m_LocalPosition: {x: 0, y: 0.122, z: -0.002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -180,17 +180,22 @@ MonoBehaviour:
   character_model: {fileID: 0}
   player_anim: {fileID: 1335173452814791013}
   movement_speed: 4
+  default_speed: 3.5
+  crouched_speed: 1.5
+  sprint_speed: 5
   rotation_speed: 9
   jump_force: 9
+  isGrounded: 0
+  isCrouched: 0
   gravity: -25
   toggle_gravity: 1
-  isGrounded: 0
+  acceleration: 0
+  horizontal: 0
   feetTransform: {fileID: 677239525517383709}
-  sphereRadius: 0.16
+  sphereRadius: 0.28
   groundMask:
     serializedVersion: 2
     m_Bits: 64
-  raydist: 0.25
 --- !u!114 &9140441594234819340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,7 +226,7 @@ MonoBehaviour:
   _interpolateSettings: 7
   _minBufferSize: 1
   _maxBufferSize: 2
-  _characterControllerPatch: 0
+  _characterControllerPatch: 1
   _ownerAuth: 1
   _interpolationTiming: 0
   _adaptiveSynchronization: 2
@@ -246,7 +251,7 @@ CharacterController:
   m_Height: 1.8
   m_Radius: 0.22
   m_SlopeLimit: 45
-  m_StepOffset: 0
+  m_StepOffset: 0.35
   m_SkinWidth: 0.0001
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: -0.22, z: 0}
