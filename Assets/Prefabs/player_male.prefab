@@ -180,7 +180,7 @@ MonoBehaviour:
   character_model: {fileID: 0}
   player_anim: {fileID: 1335173452814791013}
   movement_speed: 4
-  default_speed: 3.5
+  default_speed: 4
   crouched_speed: 1.5
   sprint_speed: 5
   rotation_speed: 9
@@ -499,6 +499,10 @@ PrefabInstance:
       propertyPath: 'm_Bones.Array.data[46]'
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2021736696045846144, guid: e1074d41166c9a14ebe8ae2555e63c50, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0c7df7e3092d6574b87b4c73b8ed4a33, type: 2}
     - target: {fileID: 5866666021909216657, guid: e1074d41166c9a14ebe8ae2555e63c50, type: 3}
       propertyPath: m_Controller
       value: 
