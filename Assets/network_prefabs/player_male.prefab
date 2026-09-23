@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isSetup: 1
-  _prefabId: 1
+  _prefabId: 0
   _hasPrefabScope: 0
   _prefabScope: 0
   _componentIndex: 0
@@ -149,8 +149,8 @@ MonoBehaviour:
   _visitiblityRules: {fileID: 0}
   p_camera: {fileID: 8265620410483183322}
   target: {fileID: 0}
-  distance: 2.48
-  height: 0.77
+  distance: 2.37
+  height: 0.24
   mouse_sensitivity: 3
   minimum_pitch: -30
   maximum_pitch: 70
@@ -180,9 +180,9 @@ MonoBehaviour:
   character_model: {fileID: 0}
   player_anim: {fileID: 1335173452814791013}
   movement_speed: 4
-  default_speed: 3
-  crouched_speed: 1.5
-  sprint_speed: 5
+  default_speed: 2.4
+  crouched_speed: 1.2
+  sprint_speed: 4.2
   rotation_speed: 9
   jump_force: 9
   isGrounded: 0
@@ -249,10 +249,10 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 3
   m_Height: 1.8
-  m_Radius: 0.22
+  m_Radius: 0.25
   m_SlopeLimit: 45
   m_StepOffset: 0.35
-  m_SkinWidth: 0.0001
+  m_SkinWidth: 0.25
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: -0.22, z: 0}
 --- !u!114 &8717486193695309986
@@ -347,9 +347,9 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.03
   far clip plane: 1000
-  field of view: 60
+  field of view: 65
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -433,7 +433,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e1074d41166c9a14ebe8ae2555e63c50, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.12
+      value: -1.37
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e1074d41166c9a14ebe8ae2555e63c50, type: 3}
       propertyPath: m_LocalPosition.z
