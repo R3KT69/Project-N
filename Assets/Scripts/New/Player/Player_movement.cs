@@ -1,7 +1,7 @@
 using PurrNet;
 using UnityEngine;
 
-public class Movement : NetworkBehaviour
+public class Player_movement : NetworkBehaviour
 {
     private CharacterController controller;
     private Camera player_camera;

@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 5392375511558675113}
   - component: {fileID: 5574839846678584807}
   - component: {fileID: 3128252892993572072}
+  - component: {fileID: -2917709615275572174}
   - component: {fileID: 3179630767187609479}
   - component: {fileID: 9140441594234819340}
   - component: {fileID: 330466920951828483}
@@ -154,6 +155,30 @@ MonoBehaviour:
   mouse_sensitivity: 3
   minimum_pitch: -30
   maximum_pitch: 70
+--- !u!114 &-2917709615275572174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3272328636267829030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d20936cd29675454abd7bc0bfb49dd9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _isSetup: 0
+  _prefabId: -2147483648
+  _hasPrefabScope: 0
+  _prefabScope: 0
+  _componentIndex: -2147483648
+  _shouldBePooled: 0
+  _parent: {fileID: 0}
+  _invertedPathToNearestParent: 
+  _directChildren: []
+  _networkRules: {fileID: 0}
+  _visitiblityRules: {fileID: 0}
+  animator: {fileID: 1335173452814791013}
 --- !u!114 &3179630767187609479
 MonoBehaviour:
   m_ObjectHideFlags: 0
