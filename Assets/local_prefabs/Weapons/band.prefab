@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3689350829145160498}
   - component: {fileID: 9143241202038434599}
   - component: {fileID: 938580218166075333}
+  - component: {fileID: -7818046896736390117}
   m_Layer: 0
   m_Name: band
   m_TagString: Untagged
@@ -86,3 +87,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-7818046896736390117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7009063893012627645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac340097ebf4b3f4c8316448c56feade, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item_name: bandage
+  itemType: 0
+  itemCategory: 0
+  item_count: 1
+  item: {fileID: 0}

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum ItemType
 {
@@ -19,7 +20,14 @@ public class Item : MonoBehaviour
     public ItemCategory itemCategory;
     public int item_count;
     public GameObject item;
-    
+    public Image image;
 
-    
+    void Start()
+    {
+        if (item == null)
+        {
+            item = gameObject;
+        }
+    }
+
 }

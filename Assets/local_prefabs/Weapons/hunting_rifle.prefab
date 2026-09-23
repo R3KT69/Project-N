@@ -183,6 +183,7 @@ GameObject:
   - component: {fileID: 3210688949894458018}
   - component: {fileID: 8889079179300650461}
   - component: {fileID: 1700942847633203433}
+  - component: {fileID: -1466840305210416886}
   m_Layer: 0
   m_Name: hunting_rifle
   m_TagString: Untagged
@@ -260,3 +261,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-1466840305210416886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4832321362295175236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac340097ebf4b3f4c8316448c56feade, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  item_name: RIfle
+  itemType: 1
+  itemCategory: 1
+  item_count: 1
+  item: {fileID: 0}
+  image: {fileID: 0}
