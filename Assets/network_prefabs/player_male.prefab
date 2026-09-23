@@ -180,7 +180,7 @@ MonoBehaviour:
   character_model: {fileID: 0}
   player_anim: {fileID: 1335173452814791013}
   movement_speed: 4
-  default_speed: 4
+  default_speed: 3
   crouched_speed: 1.5
   sprint_speed: 5
   rotation_speed: 9

@@ -83,8 +83,40 @@ public class Movement : NetworkBehaviour
 
         // Left/Right movement (horizontal)
         float targetHorizontal = 0f;
-        if (Input.GetKey(KeyCode.D)) targetHorizontal = 1f;
-        if (Input.GetKey(KeyCode.A)) targetHorizontal = -1f;
+        if (Input.GetKey(KeyCode.D))
+        {
+            float target = 1f;
+            if (Input.GetKey(KeyCode.LeftShift) && !isCrouched)
+            {
+                target = 1.5f;
+            }
+            else if (isCrouched)
+            {
+                target = 1f;
+            }
+
+            
+            targetHorizontal = target;
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            float target = -1f;
+            if (Input.GetKey(KeyCode.LeftShift) && !isCrouched)
+            {
+                target = -1.5f;
+            }
+            else if (isCrouched)
+            {
+                target = -1f;
+            }
+
+            
+            targetHorizontal = target;
+        }
+
+
+
+
         horizontal = Mathf.MoveTowards(horizontal, targetHorizontal, 4f * Time.deltaTime);
 
 
