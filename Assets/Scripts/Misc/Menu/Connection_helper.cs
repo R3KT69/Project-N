@@ -7,7 +7,15 @@ public class Connection_helper : MonoBehaviour
     public NetworkManager net_manager;
     public UDPTransport udpTransport;
     
-    
+    private void OnEnable()
+    {
+        udpTransport.onConnected += HandleConnected;
+    }
+
+    private void OnDisable()
+    {
+        udpTransport.onConnected -= HandleConnected;
+    }
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -23,6 +31,7 @@ public class Connection_helper : MonoBehaviour
     void Start()
     {
         udpTransport.address = Network_connection.server_ip;
+        udpTransport.serverPort = 5000;
         
 
         if (Network_connection.start_host)
@@ -37,6 +46,16 @@ public class Connection_helper : MonoBehaviour
             Debug.Log($"connection type: client: {Network_connection.start_client}");
             net_manager.StartClient();
         }
+    }
+
+    private void HandleConnected(Connection conn, bool asServer)
+    {
+        if (!asServer) return; 
+        var peer = udpTransport.peers[conn]; 
+        Debug.Log($"Client connected: {peer.Address}:{peer.Port}");
+        
+        
+        
     }
 
 }
