@@ -1,9 +1,16 @@
 using PurrNet;
 using UnityEngine;
 
+public enum WeaponType
+{
+    Pistol,
+    Rifle
+}
+
 public class Player_action : NetworkBehaviour
 {
     public Animator animator;
+    public WeaponType weaponType;
     private bool isHolding = false;
     private bool isAiming = false;
 
@@ -15,12 +22,25 @@ public class Player_action : NetworkBehaviour
 
         if (Input.GetKeyDown(KeyCode.R))
         {
+            weaponType = WeaponType.Rifle;
             isHolding = !isHolding;
             animator.SetBool("isHolding", isHolding);
 
             if (isHolding)
             {
                 animator.SetTrigger("Rifle");
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            weaponType = WeaponType.Pistol;
+            isHolding = !isHolding;
+            animator.SetBool("isHolding", isHolding);
+
+            if (isHolding)
+            {
+                animator.SetTrigger("Pistol");
             }
         }
 
@@ -33,7 +53,14 @@ public class Player_action : NetworkBehaviour
 
                 if (isAiming)
                 {
-                    animator.SetTrigger("RifleAim");
+                    if (weaponType == WeaponType.Rifle)
+                    {
+                        animator.SetTrigger("RifleAim");
+                    } else if (weaponType == WeaponType.Pistol)
+                    {
+                        animator.SetTrigger("PistolAim");
+                    }
+                    
                 }
             }
         }
