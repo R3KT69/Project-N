@@ -44,7 +44,6 @@ public class Player_action : NetworkBehaviour
             if (isHolding)
             {
                 animator.SetTrigger("Rifle");
-                rig_Shifting.EnableRig();
             }
         }
 
@@ -57,7 +56,6 @@ public class Player_action : NetworkBehaviour
             if (isHolding)
             {
                 animator.SetTrigger("Pistol");
-                rig_Shifting.EnableRig();
             }
         }
 
@@ -73,16 +71,18 @@ public class Player_action : NetworkBehaviour
                     if (weaponType == WeaponType.Rifle)
                     {
                         animator.SetTrigger("RifleAim");
+                        rig_Shifting.EnableRig();
                     } else if (weaponType == WeaponType.Pistol)
                     {
                         animator.SetTrigger("PistolAim");
+                        rig_Shifting.EnableRig();
                     }
                     
                 }
             }
         }
 
-        if (!isHolding)
+        if (!isAiming)
         {
             rig_Shifting.DisableRig();
         }

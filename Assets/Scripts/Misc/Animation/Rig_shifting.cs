@@ -5,18 +5,41 @@ public class Rig_shifting : MonoBehaviour
 {
     public Rig rig;
 
-    void Start()
+    [SerializeField] private float smoothTime = 0.12f;
+    private float targetWeight;
+    private float currentVelocity;
+
+    private void Start()
     {
-        DisableRig();
+        if (rig == null)
+        {
+            rig = GetComponent<Rig>();
+        }
+
+        targetWeight = 0f;
+        if (rig != null)
+        {
+            rig.weight = 0f;
+        }
+    }
+
+    private void Update()
+    {
+        if (rig == null)
+        {
+            return;
+        }
+
+        rig.weight = Mathf.SmoothDamp(rig.weight, targetWeight, ref currentVelocity, smoothTime);
     }
 
     public void DisableRig()
     {
-        rig.weight = 0;
+        targetWeight = 0f;
     }
 
     public void EnableRig()
     {
-        rig.weight = 1;
+        targetWeight = 1f;
     }
 }
