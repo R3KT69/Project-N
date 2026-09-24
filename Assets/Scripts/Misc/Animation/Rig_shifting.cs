@@ -9,6 +9,7 @@ public class Rig_shifting : NetworkBehaviour
     [SerializeField] private float smoothTime = 0.12f;
     private float targetWeight;
     private float currentVelocity;
+    private bool rigEnabled;
 
     private void Start()
     {
@@ -18,6 +19,8 @@ public class Rig_shifting : NetworkBehaviour
         }
 
         targetWeight = 0f;
+        rigEnabled = false;
+
         if (rig != null)
         {
             rig.weight = 0f;
@@ -26,8 +29,6 @@ public class Rig_shifting : NetworkBehaviour
 
     private void Update()
     {
-        if (!isOwner) return;
-        
         if (rig == null)
         {
             return;
@@ -38,11 +39,34 @@ public class Rig_shifting : NetworkBehaviour
 
     public void DisableRig()
     {
-        targetWeight = 0f;
+        SetRigEnabled(false);
     }
 
     public void EnableRig()
     {
-        targetWeight = 1f;
+        SetRigEnabled(true);
+    }
+
+    private void SetRigEnabled(bool enabled)
+    {
+        if (rigEnabled == enabled)
+        {
+            return;
+        }
+
+        rigEnabled = enabled;
+        targetWeight = enabled ? 1f : 0f;
+
+        if (isOwner)
+        {
+            RpcSetRigEnabled(enabled);
+        }
+    }
+
+    [ObserversRpc]
+    private void RpcSetRigEnabled(bool enabled)
+    {
+        rigEnabled = enabled;
+        targetWeight = enabled ? 1f : 0f;
     }
 }
