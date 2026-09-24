@@ -165,7 +165,7 @@ AnimatorStateMachine:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Rifle
+  m_Name: weapon_action
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 5297431401121056091}
@@ -175,13 +175,16 @@ AnimatorStateMachine:
     m_Position: {x: -530, y: 330, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1874562469961067454}
-    m_Position: {x: 130, y: 380, z: 0}
+    m_Position: {x: 100, y: 400, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3449358929850269798}
     m_Position: {x: -260, y: 260, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5348507354090449907}
     m_Position: {x: -350, y: 400, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -2862447494485026293}
+    m_Position: {x: -30, y: 650, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: -4407219282518904021}
@@ -294,6 +297,32 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 7400000, guid: b9b54f51f89956a4bb0b319e529a96d8, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
+--- !u!1102 &-2862447494485026293
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: RifleAim
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 558d9a64d35f34e4aad61dd3e292159b, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -690,7 +719,7 @@ AnimatorController:
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
   - serializedVersion: 5
-    m_Name: Rifle
+    m_Name: weapon_action
     m_StateMachine: {fileID: -5130249772058453262}
     m_Mask: {fileID: 31900000, guid: 6b59c8bf5f3037241a844732f51a4ffc, type: 2}
     m_Motions: []

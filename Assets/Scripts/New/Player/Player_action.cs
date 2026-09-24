@@ -9,6 +9,7 @@ public enum WeaponType
 
 public class Player_action : NetworkBehaviour
 {
+    public Player_movement player_Movement;
     public Animator animator;
     public WeaponType weaponType;
     private bool isHolding = false;
@@ -17,7 +18,14 @@ public class Player_action : NetworkBehaviour
 
     private void Update()
     {
-        if (!isOwner) return;
+        if (!player_Movement.isInEditor)
+        {
+            if (!isOwner) return;
+        }
+        
+
+
+
         if (animator == null) return;
 
         if (Input.GetKeyDown(KeyCode.R))

@@ -17,6 +17,7 @@ public class Player_movement : NetworkBehaviour
     [Range(1f, 10.0f)] public float jump_force = 10f;
     public bool isGrounded = false;
     public bool isCrouched = false;
+    public bool isInEditor = false;
 
     [Header("Physics setting")]
     public float gravity = -25f;
@@ -47,7 +48,11 @@ public class Player_movement : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isOwner) return;
+        if (!isInEditor)
+        {
+            if (!isOwner) return;
+        }
+        
 
         Vector3 input_vector = Vector3.zero;
 

@@ -103,6 +103,7 @@ MonoBehaviour:
   _directChildren: []
   _networkRules: {fileID: 0}
   _visitiblityRules: {fileID: 0}
+  player_Movement: {fileID: 3179630767187609479}
   p_camera: {fileID: 8265620410483183322}
   target: {fileID: 0}
   distance: 2.37
@@ -141,6 +142,7 @@ MonoBehaviour:
   - {fileID: 7634885390363796574, guid: 5b5d534e2999a394982a6f13a2f7b69d, type: 3}
   - {fileID: 7634885390363796574, guid: 5b5d534e2999a394982a6f13a2f7b69d, type: 3}
   - {fileID: 7634885390363796574, guid: 5b5d534e2999a394982a6f13a2f7b69d, type: 3}
+  selectedItem: {fileID: 0}
 --- !u!114 &-2917709615275572174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,6 +167,7 @@ MonoBehaviour:
   _networkRules: {fileID: 0}
   _visitiblityRules: {fileID: 0}
   animator: {fileID: 1335173452814791013}
+  weaponType: 0
 --- !u!114 &3179630767187609479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,6 +201,7 @@ MonoBehaviour:
   jump_force: 9
   isGrounded: 0
   isCrouched: 0
+  isInEditor: 1
   gravity: -25
   toggle_gravity: 1
   acceleration: 0
@@ -596,7 +600,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4832321362295175236, guid: a63dfef35bc98de4ab239aff193c5127, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

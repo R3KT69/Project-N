@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Player_camera : NetworkBehaviour
 {
+    public Player_movement player_Movement;
     public Camera p_camera;
     public Transform target;
     public float distance = 6f;
@@ -32,10 +33,14 @@ public class Player_camera : NetworkBehaviour
 
     void LateUpdate()
     {
-        if (!isOwner || p_camera == null || target == null){
-            p_camera.gameObject.SetActive(false);
-            return;
-        } 
+        if (!player_Movement.isInEditor)
+        {
+            if (!isOwner || p_camera == null || target == null){
+                p_camera.gameObject.SetActive(false);
+                return;
+            } 
+        }
+        
         
 
         yaw += Input.GetAxis("Mouse X") * mouse_sensitivity;
