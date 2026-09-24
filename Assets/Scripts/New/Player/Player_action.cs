@@ -12,8 +12,18 @@ public class Player_action : NetworkBehaviour
     public Player_movement player_Movement;
     public Animator animator;
     public WeaponType weaponType;
+    public Rig_shifting rig_Shifting;
     private bool isHolding = false;
     private bool isAiming = false;
+
+    void Start()
+    {
+        if (rig_Shifting == null)
+        {
+            rig_Shifting = gameObject.GetComponent<Rig_shifting>();
+        }
+       
+    }
 
 
     private void Update()
@@ -22,9 +32,6 @@ public class Player_action : NetworkBehaviour
         {
             if (!isOwner) return;
         }
-        
-
-
 
         if (animator == null) return;
 
@@ -37,6 +44,7 @@ public class Player_action : NetworkBehaviour
             if (isHolding)
             {
                 animator.SetTrigger("Rifle");
+                rig_Shifting.EnableRig();
             }
         }
 
@@ -49,6 +57,7 @@ public class Player_action : NetworkBehaviour
             if (isHolding)
             {
                 animator.SetTrigger("Pistol");
+                rig_Shifting.EnableRig();
             }
         }
 
@@ -71,6 +80,11 @@ public class Player_action : NetworkBehaviour
                     
                 }
             }
+        }
+
+        if (!isHolding)
+        {
+            rig_Shifting.DisableRig();
         }
     }
 }
