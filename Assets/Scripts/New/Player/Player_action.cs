@@ -43,7 +43,7 @@ public class Player_action : NetworkBehaviour
 
             if (isHolding)
             {
-                animator.SetTrigger("Rifle");
+                RpcTriggerAim_Rifle();
             }
         }
 
@@ -55,7 +55,7 @@ public class Player_action : NetworkBehaviour
 
             if (isHolding)
             {
-                animator.SetTrigger("Pistol");
+                RpcTriggerAim_Pistol();
             }
         }
 
@@ -70,11 +70,11 @@ public class Player_action : NetworkBehaviour
                 {
                     if (weaponType == WeaponType.Rifle)
                     {
-                        animator.SetTrigger("RifleAim");
+                        RpcTriggerAim_RifleAim();
                         rig_Shifting.EnableRig();
                     } else if (weaponType == WeaponType.Pistol)
                     {
-                        animator.SetTrigger("PistolAim");
+                        RpcTriggerAim_PistolAim();
                         rig_Shifting.EnableRig();
                     }
                     
@@ -87,4 +87,33 @@ public class Player_action : NetworkBehaviour
             rig_Shifting.DisableRig();
         }
     }
+
+    [ObserversRpc]
+    private void RpcTriggerAim_Rifle()
+    {
+        animator.SetTrigger("Rifle");
+    }
+
+    [ObserversRpc]
+    private void RpcTriggerAim_Pistol()
+    {
+        animator.SetTrigger("Pistol");
+    }
+
+    [ObserversRpc]
+    private void RpcTriggerAim_RifleAim()
+    {
+        animator.SetTrigger("RifleAim");
+    }
+
+    [ObserversRpc]
+    private void RpcTriggerAim_PistolAim()
+    {
+        animator.SetTrigger("PistolAim");
+    }
+
+
 }
+
+
+

@@ -1,7 +1,8 @@
+using PurrNet;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 
-public class Rig_shifting : MonoBehaviour
+public class Rig_shifting : NetworkBehaviour
 {
     public Rig rig;
 
@@ -25,6 +26,8 @@ public class Rig_shifting : MonoBehaviour
 
     private void Update()
     {
+        if (!isOwner) return;
+        
         if (rig == null)
         {
             return;
