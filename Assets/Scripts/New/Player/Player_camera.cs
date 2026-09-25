@@ -94,9 +94,6 @@ public class Player_camera : NetworkBehaviour
 
         if (player_action.isAiming)
         {
-            // Only use camera yaw for the shoulder offset.
-            // This prevents player rotation from feeding back
-            // into the camera position.
 
             Quaternion yaw_rotation =
                 Quaternion.Euler(0f, yaw, 0f);
