@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using PurrNet;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
