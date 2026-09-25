@@ -56,6 +56,8 @@ public class Player_movement : NetworkBehaviour
 
         Vector3 input_vector = Vector3.zero;
 
+        RotatePlayerTowardCamera();
+
         // --- input checks ---
         if (Input.GetKey(KeyCode.W)) input_vector += Vector3.forward; 
         if (Input.GetKey(KeyCode.A)) input_vector += Vector3.left; 
@@ -69,7 +71,7 @@ public class Player_movement : NetworkBehaviour
 
         // Forward/Backward movement (acceleration)
         float targetAcceleration = 0f;
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S)) 
+        if (Input.GetKey(KeyCode.W)) 
         { 
             float target = 1f;
             if (Input.GetKey(KeyCode.LeftShift) && !isCrouched)
@@ -83,6 +85,24 @@ public class Player_movement : NetworkBehaviour
 
             targetAcceleration = target; 
         }
+
+        if (Input.GetKey(KeyCode.S)) 
+        { 
+            float target = -1f;
+            if (Input.GetKey(KeyCode.LeftShift) && !isCrouched)
+            {
+                target = -1.5f;
+            }
+            else if (isCrouched)
+            {
+                target = -1f;
+            }
+
+            targetAcceleration = target; 
+        }
+
+
+
         acceleration = Mathf.MoveTowards(acceleration, targetAcceleration, 4f * Time.deltaTime);
 
 
@@ -91,11 +111,8 @@ public class Player_movement : NetworkBehaviour
         if (Input.GetKey(KeyCode.D))
         {
             float target = 1f;
-            if (Input.GetKey(KeyCode.LeftShift) && !isCrouched)
-            {
-                target = 1.5f;
-            }
-            else if (isCrouched)
+            
+            if (isCrouched)
             {
                 target = 1f;
             }
@@ -106,11 +123,8 @@ public class Player_movement : NetworkBehaviour
         if (Input.GetKey(KeyCode.A))
         {
             float target = -1f;
-            if (Input.GetKey(KeyCode.LeftShift) && !isCrouched)
-            {
-                target = -1.5f;
-            }
-            else if (isCrouched)
+            
+            if (isCrouched)
             {
                 target = -1f;
             }
@@ -160,12 +174,13 @@ public class Player_movement : NetworkBehaviour
             Vector3 movement_direction = right * input_vector.x + forward * input_vector.z;
             movement_direction.Normalize();
 
-            
+            /*
             Quaternion target_rotation = Quaternion.LookRotation(movement_direction, Vector3.up);
+
             character_model.rotation = Quaternion.Lerp(
                 character_model.rotation,
                 target_rotation,
-                rotation_speed * Time.deltaTime);
+                rotation_speed * Time.deltaTime);*/
 
             controller.Move(movement_direction * movement_speed * Time.deltaTime);
         }
@@ -189,6 +204,22 @@ public class Player_movement : NetworkBehaviour
 
         
         
+    }
+
+    void RotatePlayerTowardCamera()
+    {
+        Vector3 inputDir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+
+        if (inputDir.sqrMagnitude > 0.01f)
+        {
+            // Camera-relative direction
+            Vector3 camForward = player_camera.transform.forward;
+            camForward.y = 0;
+            camForward.Normalize();
+
+            Quaternion targetRotation = Quaternion.LookRotation(camForward);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotation_speed * Time.deltaTime);
+        }
     }
 
     [ObserversRpc]

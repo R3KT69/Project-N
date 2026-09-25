@@ -13,8 +13,8 @@ public class Player_action : NetworkBehaviour
     public Animator animator;
     public WeaponType weaponType;
     public Rig_shifting rig_Shifting;
-    private bool isHolding = false;
-    private bool isAiming = false;
+    public bool isHolding = false;
+    public bool isAiming = false;
 
     void Start()
     {
