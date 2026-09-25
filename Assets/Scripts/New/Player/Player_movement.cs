@@ -74,7 +74,7 @@ public class Player_movement : NetworkBehaviour
         if (Input.GetKey(KeyCode.W)) 
         { 
             float target = 1f;
-            if (Input.GetKey(KeyCode.LeftShift) && !isCrouched)
+            if (Input.GetKey(KeyCode.LeftShift) && !isCrouched && horizontal <= 0)
             {
                 target = 1.5f;
             }
@@ -89,11 +89,8 @@ public class Player_movement : NetworkBehaviour
         if (Input.GetKey(KeyCode.S)) 
         { 
             float target = -1f;
-            if (Input.GetKey(KeyCode.LeftShift) && !isCrouched)
-            {
-                target = -1.5f;
-            }
-            else if (isCrouched)
+            
+            if (isCrouched)
             {
                 target = -1f;
             }
