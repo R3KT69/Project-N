@@ -299,7 +299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdb90b913935e644baaa86c076d788e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Weight: 1
+  m_Weight: 0.756
   m_Data:
     m_ConstrainedObject: {fileID: 601356692825690007}
     m_SourceObjects:
@@ -2301,7 +2301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdb90b913935e644baaa86c076d788e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Weight: 0.209
+  m_Weight: 0.7
   m_Data:
     m_ConstrainedObject: {fileID: 452414110648348274}
     m_SourceObjects:
@@ -3413,7 +3413,9 @@ MonoBehaviour:
   _directChildren: []
   _networkRules: {fileID: 0}
   _visitiblityRules: {fileID: 0}
-  rig: {fileID: 3781357604163099956}
+  rifle_rig: {fileID: 3781357604163099956}
+  spine_rig: {fileID: 8139641799266867108}
+  head_rig: {fileID: 9198829407975867777}
   smoothTime: 0.1
 --- !u!114 &5844346778534818715
 MonoBehaviour:

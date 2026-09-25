@@ -1,10 +1,14 @@
+using System.Collections.Generic;
 using PurrNet;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
 
 public class Rig_shifting : NetworkBehaviour
 {
-    public Rig rig;
+    public Rig rifle_rig;
+    public Rig spine_rig;
+    public Rig head_rig;
+    
 
     [SerializeField] private float smoothTime = 0.12f;
     private float targetWeight;
@@ -13,28 +17,28 @@ public class Rig_shifting : NetworkBehaviour
 
     private void Start()
     {
-        if (rig == null)
-        {
-            rig = GetComponent<Rig>();
-        }
-
         targetWeight = 0f;
         rigEnabled = false;
 
-        if (rig != null)
+        if (rifle_rig != null)
         {
-            rig.weight = 0f;
+            rifle_rig.weight = 0f;
         }
     }
 
     private void Update()
     {
-        if (rig == null)
-        {
-            return;
-        }
+        if (rifle_rig == null || spine_rig == null || head_rig == null) return;
+        
 
-        rig.weight = Mathf.SmoothDamp(rig.weight, targetWeight, ref currentVelocity, smoothTime);
+        toggle_rig(rifle_rig);
+        toggle_rig(spine_rig);
+        toggle_rig(head_rig);
+    }
+
+    public void toggle_rig(Rig selected_rig)
+    {
+        selected_rig.weight = Mathf.SmoothDamp(selected_rig.weight, targetWeight, ref currentVelocity, smoothTime);
     }
 
     public void DisableRig()
