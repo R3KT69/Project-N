@@ -31,7 +31,7 @@ public class Connection_helper : MonoBehaviour
     void Start()
     {
         udpTransport.address = Network_connection.server_ip;
-        udpTransport.serverPort = 5000;
+        udpTransport.serverPort = 5555;
         
 
         if (Network_connection.start_host)

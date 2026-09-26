@@ -50,7 +50,8 @@ public class Rig_shifting : NetworkBehaviour
         SetRigEnabled(true);
     }
 
-    private void SetRigEnabled(bool enabled)
+    [ObserversRpc]
+    public void SetRigEnabled(bool enabled)
     {
         if (rigEnabled == enabled)
         {

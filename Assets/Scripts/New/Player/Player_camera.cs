@@ -6,6 +6,7 @@ public class Player_camera : NetworkBehaviour
 {
     public Player_movement player_Movement;
     public Player_action player_action;
+    public GameObject playerCamRotation;
     public Camera p_camera;
     public Transform target;
 
@@ -41,16 +42,24 @@ public class Player_camera : NetworkBehaviour
         yaw = target.eulerAngles.y;
     }
 
+    [ObserversRpc]
+    private void SetCamRotationRPC(Quaternion rot)
+    {
+        p_camera.transform.rotation = rot;
+    }
 
     void LateUpdate()
     {
+        
+
         if (!player_Movement.isInEditor)
         {
             if (!isOwner || p_camera == null || target == null)
             {
                 if (p_camera != null)
                 {
-                    p_camera.gameObject.SetActive(false);
+                    p_camera.gameObject.GetComponent<Camera>().enabled = false;
+                    p_camera.gameObject.GetComponent<AudioListener>().enabled = false;
                 }
 
                 return;
@@ -120,6 +129,7 @@ public class Player_camera : NetworkBehaviour
                 camera_rotation
             );
 
+            SetCamRotationRPC(camera_rotation);
 
             // =========================
             // ROTATE CHARACTER
