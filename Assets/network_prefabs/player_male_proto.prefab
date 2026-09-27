@@ -4040,11 +4040,11 @@ MonoBehaviour:
   crouched_speed: 1.2
   sprint_speed: 4.2
   rotation_speed: 9
-  jump_force: 9
+  jump_force: 8
   isGrounded: 1
   isCrouched: 0
   isInEditor: 0
-  gravity: -25
+  gravity: -30
   toggle_gravity: 1
   acceleration: 0
   horizontal: 0
