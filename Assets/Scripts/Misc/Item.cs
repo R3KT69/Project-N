@@ -19,15 +19,8 @@ public class Item : MonoBehaviour
     public ItemType itemType;
     public ItemCategory itemCategory;
     public int item_count;
-    public GameObject item;
     public Image image;
 
-    void Start()
-    {
-        if (item == null)
-        {
-            item = gameObject;
-        }
-    }
+    
 
 }

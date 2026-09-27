@@ -5,9 +5,11 @@ using UnityEngine.Animations.Rigging;
 public class Rig_shifting : NetworkBehaviour
 {
     public Rig rifle_rig;
+    public Rig pistol_rig;
     public Rig spine_rig;
     public Rig head_rig;
     
+    public Player_inventory player_Inventory;
 
     [SerializeField] private float smoothTime = 0.12f;
     private float targetWeight;
@@ -16,23 +18,45 @@ public class Rig_shifting : NetworkBehaviour
 
     private void Start()
     {
+        if (player_Inventory == null)
+        {
+            player_Inventory = gameObject.GetComponent<Player_inventory>();
+        }
+
         targetWeight = 0f;
         rigEnabled = false;
 
-        if (rifle_rig != null)
+        if (rifle_rig != null || pistol_rig != null)
         {
             rifle_rig.weight = 0f;
+            pistol_rig.weight = 0f;
         }
     }
 
     private void Update()
     {
-        if (rifle_rig == null || spine_rig == null || head_rig == null) return;
+        if (rifle_rig == null || spine_rig == null || head_rig == null || pistol_rig == null)
+        {
+            Debug.Log("rig not found/set properly");
+            return;
+        }
         
+        if (player_Inventory.selectedItem.itemCategory == ItemCategory.TwoHanded)
+        {
+            toggle_rig(rifle_rig);
+            toggle_rig(spine_rig);
+            toggle_rig(head_rig);
+        }
 
-        toggle_rig(rifle_rig);
-        toggle_rig(spine_rig);
-        toggle_rig(head_rig);
+        if (player_Inventory.selectedItem.itemCategory == ItemCategory.OneHanded)
+        {
+            toggle_rig(pistol_rig);
+            toggle_rig(spine_rig);
+            toggle_rig(head_rig);
+        }
+
+        
+        
     }
 
     public void toggle_rig(Rig selected_rig)
