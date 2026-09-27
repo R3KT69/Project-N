@@ -37,8 +37,8 @@ public class Player_action : NetworkBehaviour
 
         if (animator == null) return;
 
-        trigger_equip_twohanded();
-        trigger_equip_onehanded();
+        handle_equip_twohanded();
+        handle_equip_onehanded();
         
         if (isHolding)
         {
@@ -83,7 +83,7 @@ public class Player_action : NetworkBehaviour
         }*/
     }
 
-    public void trigger_equip_twohanded()
+    public void handle_equip_twohanded()
     {
         if (Input.GetKeyDown(KeyCode.R) && player_Inventory.selectedItem.itemCategory == ItemCategory.TwoHanded)
         {
@@ -105,7 +105,7 @@ public class Player_action : NetworkBehaviour
         }
     }
 
-    public void trigger_equip_onehanded()
+    public void handle_equip_onehanded()
     {
         if (Input.GetKeyDown(KeyCode.R) && player_Inventory.selectedItem.itemCategory == ItemCategory.OneHanded)
         {

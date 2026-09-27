@@ -19,46 +19,51 @@ public class Player_inventory : NetworkBehaviour
     {
         if (!isOwner) return;
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (!player_Action.isHolding)
         {
-            RpcSelectedItem(0);
-            SelectItem();
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                RpcSelectedItem(0);
+                //SelectItem();
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                RpcSelectedItem(1);
+                //SelectItem();
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                RpcSelectedItem(2);
+                //SelectItem();
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                RpcSelectedItem(3);
+                //SelectItem();
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha5))
+            {
+                RpcSelectedItem(4);
+                //SelectItem();
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha6))
+            {
+                RpcSelectedItem(5);
+                //SelectItem();
+            }
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            RpcSelectedItem(1);
-            SelectItem();
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            RpcSelectedItem(2);
-            SelectItem();
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            RpcSelectedItem(3);
-            SelectItem();
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha5))
-        {
-            RpcSelectedItem(4);
-            SelectItem();
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha6))
-        {
-            RpcSelectedItem(5);
-            SelectItem();
-        }
+
+        
     }
 
     private void SelectItem()
     {
         if (selectedItem.itemCategory == ItemCategory.OneHanded)
         {
-            player_Action.trigger_equip_onehanded();
+            player_Action.handle_equip_onehanded();
         } else if (selectedItem.itemCategory == ItemCategory.TwoHanded)
         {
-            player_Action.trigger_equip_twohanded();
+            player_Action.handle_equip_twohanded();
         }
     }
 
