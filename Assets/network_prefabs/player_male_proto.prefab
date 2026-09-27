@@ -1287,7 +1287,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 389243402007718555}
-  - component: {fileID: 6731783074711436432}
   - component: {fileID: 759505096407367524}
   m_Layer: 0
   m_Name: aim
@@ -1313,60 +1312,6 @@ Transform:
   - {fileID: 8025640941168952501}
   m_Father: {fileID: 3095069883951981848}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6731783074711436432
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3423921495806218104}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3c430f382484144e925c097c2d33cfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Weight: 1
-  m_Data:
-    m_ConstrainedObject: {fileID: 6815461649090418301}
-    m_SourceObjects:
-      m_Length: 1
-      m_Item0:
-        transform: {fileID: 7201021486767290213}
-        weight: 1
-      m_Item1:
-        transform: {fileID: 0}
-        weight: 0
-      m_Item2:
-        transform: {fileID: 0}
-        weight: 0
-      m_Item3:
-        transform: {fileID: 0}
-        weight: 0
-      m_Item4:
-        transform: {fileID: 0}
-        weight: 0
-      m_Item5:
-        transform: {fileID: 0}
-        weight: 0
-      m_Item6:
-        transform: {fileID: 0}
-        weight: 0
-      m_Item7:
-        transform: {fileID: 0}
-        weight: 0
-    m_Offset: {x: 0, y: 0, z: 0}
-    m_MinLimit: -180
-    m_MaxLimit: 180
-    m_AimAxis: 2
-    m_UpAxis: 4
-    m_WorldUpType: 0
-    m_WorldUpObject: {fileID: 0}
-    m_WorldUpAxis: 2
-    m_MaintainOffset: 0
-    m_ConstrainedAxes:
-      x: 1
-      y: 1
-      z: 1
 --- !u!114 &759505096407367524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2901,9 +2846,9 @@ Transform:
   m_GameObject: {fileID: 6643449079368714478}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: -0, z: -0.819}
+  m_LocalPosition: {x: 0.044, y: -0.156, z: -0.196}
   m_LocalScale: {x: 0.22, y: 0.22, z: 0.22}
-  m_ConstrainProportionsScale: 1
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2138580157813555500}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4003,7 +3948,7 @@ MonoBehaviour:
   minimum_pitch: -45
   maximum_pitch: 80
   aim_offset: {x: 0.9, y: 0.3, z: -1}
-  aim_transition_speed: 5
+  aim_transition_speed: 10
 --- !u!114 &4674021931755222137
 MonoBehaviour:
   m_ObjectHideFlags: 0

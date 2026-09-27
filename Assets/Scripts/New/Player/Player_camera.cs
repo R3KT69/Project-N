@@ -27,7 +27,7 @@ public class Player_camera : NetworkBehaviour
 
     
 
-
+    private bool p_camera_cached = false;
     private float yaw;
     private float pitch = 15f;
     [SerializeField] private float aim_transition_speed = 1f;
@@ -123,7 +123,15 @@ public class Player_camera : NetworkBehaviour
                 yaw_rotation * aim_offset;*/
 
             //Vector3 aim_position = aim_sphere.transform.position;
-            p_camera_default = p_camera.transform.position;
+
+
+            if (p_camera_cached == false)
+            {
+                p_camera_default = p_camera.transform.position;
+                p_camera_cached = true;
+            }
+            
+           
 
             aim_position = Vector3.Lerp(
                 p_camera.transform.position,
@@ -180,15 +188,11 @@ public class Player_camera : NetworkBehaviour
 
         
 
-        /*
-        if ((p_camera.transform.position - p_camera_default).sqrMagnitude > 0.0001f)
-        {
-            camera_position = Vector3.Lerp(
+        camera_position = Vector3.Lerp(
                 p_camera.transform.position,
                 camera_position,
                 Time.deltaTime * aim_transition_speed
             );
-        }*/
 
         p_camera.transform.SetPositionAndRotation(
             camera_position,
