@@ -9,6 +9,7 @@ public class Player_camera : NetworkBehaviour
     public GameObject playerCamRotation;
     public Camera p_camera;
     public Transform target;
+    public GameObject aim_sphere;
 
     [Header("Normal Camera")]
     public float distance = 6f;
@@ -21,6 +22,8 @@ public class Player_camera : NetworkBehaviour
 
     [Header("Aim Camera")]
     public Vector3 aim_offset = new Vector3(0.6f, 1.6f, -0.2f);
+
+    
 
 
     private float yaw;
@@ -45,6 +48,9 @@ public class Player_camera : NetworkBehaviour
     [ObserversRpc]
     private void SetCamRotationRPC(Quaternion rot)
     {
+        if (isOwner) return;
+        
+
         p_camera.transform.rotation = rot;
     }
 
@@ -109,10 +115,14 @@ public class Player_camera : NetworkBehaviour
 
 
             // Shoulder position
-            Vector3 aim_position =
+            /*Vector3 aim_position =
                 target.position +
-                yaw_rotation * aim_offset;
+                yaw_rotation * aim_offset;*/
 
+            Vector3 aim_position = aim_sphere.transform.position;
+
+
+            
 
             // Camera rotation
             Quaternion camera_rotation =
