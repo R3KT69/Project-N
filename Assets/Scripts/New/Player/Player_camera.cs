@@ -14,6 +14,7 @@ public class Player_camera : NetworkBehaviour
     [Header("Normal Camera")]
     public float distance = 6f;
     public float height = 2f;
+    public Vector3 p_camera_default;
 
     [Header("Mouse")]
     public float mouse_sensitivity = 3f;
@@ -22,13 +23,15 @@ public class Player_camera : NetworkBehaviour
 
     [Header("Aim Camera")]
     public Vector3 aim_offset = new Vector3(0.6f, 1.6f, -0.2f);
+    
 
     
 
 
     private float yaw;
     private float pitch = 15f;
-
+    [SerializeField] private float aim_transition_speed = 1f;
+    private Vector3 aim_position;
 
     void Start()
     {
@@ -52,6 +55,11 @@ public class Player_camera : NetworkBehaviour
         
 
         p_camera.transform.rotation = rot;
+    }
+
+    void Update()
+    {
+        Debug.Log($"p_camera transform:{p_camera.transform.position}\np_camera_default transform:{p_camera_default}");
     }
 
     void LateUpdate()
@@ -109,35 +117,25 @@ public class Player_camera : NetworkBehaviour
 
         if (player_action.isAiming)
         {
-
-            Quaternion yaw_rotation =
-                Quaternion.Euler(0f, yaw, 0f);
-
-
             // Shoulder position
             /*Vector3 aim_position =
                 target.position +
                 yaw_rotation * aim_offset;*/
 
-            Vector3 aim_position = aim_sphere.transform.position;
+            //Vector3 aim_position = aim_sphere.transform.position;
+            p_camera_default = p_camera.transform.position;
 
-
+            aim_position = Vector3.Lerp(
+                p_camera.transform.position,
+                aim_sphere.transform.position,
+                Time.deltaTime * aim_transition_speed
+            );
             
-
             // Camera rotation
-            Quaternion camera_rotation =
-                Quaternion.Euler(
-                    pitch,
-                    yaw,
-                    0f
-                );
-
+            Quaternion camera_rotation = Quaternion.Euler(pitch, yaw, 0f);
 
             // Set both at once
-            p_camera.transform.SetPositionAndRotation(
-                aim_position,
-                camera_rotation
-            );
+            p_camera.transform.SetPositionAndRotation(aim_position, camera_rotation);
 
             SetCamRotationRPC(camera_rotation);
 
@@ -145,8 +143,7 @@ public class Player_camera : NetworkBehaviour
             // ROTATE CHARACTER
             // =========================
 
-            Vector3 lookDirection =
-                p_camera.transform.forward;
+            Vector3 lookDirection = p_camera.transform.forward;
 
             lookDirection.y = 0f;
 
@@ -170,38 +167,28 @@ public class Player_camera : NetworkBehaviour
 
             return;
         }
-
+        
 
         // =========================
         // NORMAL ORBIT CAMERA
         // =========================
 
-        Vector3 target_position =
-            target.position +
-            Vector3.up * height;
+        Vector3 target_position = target.position + Vector3.up * height;
+        Quaternion orbit_rotation = Quaternion.Euler( pitch, yaw, 0f);
+        Vector3 camera_position = target_position + orbit_rotation * Vector3.back * distance;
+        Quaternion normal_camera_rotation = Quaternion.LookRotation(target_position - camera_position, Vector3.up);
 
+        
 
-        Quaternion orbit_rotation =
-            Quaternion.Euler(
-                pitch,
-                yaw,
-                0f
+        /*
+        if ((p_camera.transform.position - p_camera_default).sqrMagnitude > 0.0001f)
+        {
+            camera_position = Vector3.Lerp(
+                p_camera.transform.position,
+                camera_position,
+                Time.deltaTime * aim_transition_speed
             );
-
-
-        Vector3 camera_position =
-            target_position +
-            orbit_rotation *
-            Vector3.back *
-            distance;
-
-
-        Quaternion normal_camera_rotation =
-            Quaternion.LookRotation(
-                target_position - camera_position,
-                Vector3.up
-            );
-
+        }*/
 
         p_camera.transform.SetPositionAndRotation(
             camera_position,
