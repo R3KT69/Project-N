@@ -33,6 +33,14 @@ public class Player_camera : NetworkBehaviour
     [SerializeField] private float aim_transition_speed = 1f;
     private Vector3 aim_position;
 
+    void OnGUI()
+    {
+        if (!isOwner) return;
+        
+        float fps = 1f / Time.deltaTime;
+        GUI.Label(new Rect(20, 20, 200, 30), "FPS: " + fps.ToString("F0"));
+    }
+
     void Start()
     {
         if (target == null)

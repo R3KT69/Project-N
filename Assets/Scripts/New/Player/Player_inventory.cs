@@ -8,7 +8,12 @@ public class Player_inventory : NetworkBehaviour
     public Item selectedItem;
     public Player_action player_Action;
     
-    private bool isSelected = false;
+
+    void OnGUI()
+    {
+        if (!isOwner) return;
+        GUI.Label(new Rect(20, 40, 300, 30), $"selected_Item: {selectedItem.item_name}");
+    }
 
     void Awake()
     {

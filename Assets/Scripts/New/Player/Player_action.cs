@@ -39,7 +39,13 @@ public class Player_action : NetworkBehaviour
 
         handle_equip_twohanded();
         handle_equip_onehanded();
+        handle_unequip();
+        if (!isAiming) rig_Shifting.DisableRig();
         
+    }
+
+    public void handle_unequip()
+    {
         if (isHolding)
         {
             if (Input.GetMouseButtonDown(1))
@@ -62,25 +68,6 @@ public class Player_action : NetworkBehaviour
                 }
             }
         }
-
-        if (!isAiming)
-        {
-            rig_Shifting.DisableRig();
-        }
-
-        /*
-        if (!isHolding)
-        {
-            if (player_Inventory.selectedItem.itemCategory == ItemCategory.OneHanded)
-            {
-                RpcInvTransferTransform(pistol_holster.transform);
-            }
-            if (player_Inventory.selectedItem.itemCategory == ItemCategory.TwoHanded)
-            {
-                RpcInvTransferTransform(rifle_holster.transform);
-            }
-            
-        }*/
     }
 
     public void handle_equip_twohanded()
