@@ -13,6 +13,12 @@ public class Player_inventory : NetworkBehaviour
     {
         if (!isOwner) return;
         GUI.Label(new Rect(20, 40, 300, 30), $"selected_Item: {selectedItem.item_name}");
+
+        for (int i = 0; i < 6; i++)
+        {
+            GUI.Label(new Rect(20, 40 + i*20 + 275, 300, 30), $"hotbar[{i}]: {Hotbar[i].item_name}");
+        }
+        
     }
 
     void Awake()
