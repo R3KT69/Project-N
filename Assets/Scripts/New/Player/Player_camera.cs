@@ -14,6 +14,7 @@ public class Player_camera : NetworkBehaviour
     [Header("Normal Camera")]
     public float distance = 6f;
     public float height = 2f;
+    public float offset = 0.5f;
     public Vector3 p_camera_default;
 
     [Header("Mouse")]
@@ -189,18 +190,22 @@ public class Player_camera : NetworkBehaviour
         // NORMAL ORBIT CAMERA
         // =========================
 
-        Vector3 target_position = target.position + Vector3.up * height;
-        Quaternion orbit_rotation = Quaternion.Euler( pitch, yaw, 0f);
-        Vector3 camera_position = target_position + orbit_rotation * Vector3.back * distance;
-        Quaternion normal_camera_rotation = Quaternion.LookRotation(target_position - camera_position, Vector3.up);
-
         
+        Vector3 target_position = target.position + Vector3.up * height;
+
+        Quaternion orbit_rotation = Quaternion.Euler(pitch, yaw, 0f);
+
+        Vector3 camera_position = target_position
+            + orbit_rotation * Vector3.right * offset
+            + orbit_rotation * Vector3.back * distance;
+
+        Quaternion normal_camera_rotation = orbit_rotation;
 
         camera_position = Vector3.Lerp(
-                p_camera.transform.position,
-                camera_position,
-                Time.deltaTime * aim_transition_speed
-            );
+            p_camera.transform.position,
+            camera_position,
+            Time.deltaTime * aim_transition_speed * 0.5f
+        );
 
         p_camera.transform.SetPositionAndRotation(
             camera_position,
