@@ -4023,9 +4023,9 @@ MonoBehaviour:
   boneShape: 1
   drawBones: 1
   drawTripods: 0
-  boneSize: 1
-  tripodSize: 1
-  boneColor: {r: 1, g: 0.68751585, b: 0, a: 0.5}
+  boneSize: 1.93
+  tripodSize: 1.05
+  boneColor: {r: 0.4245283, g: 0.34464785, b: 0, a: 0.18431373}
   m_Transforms:
   - {fileID: 7590628663175061087}
   - {fileID: 0}

@@ -67,10 +67,10 @@ public class Player_action : NetworkBehaviour
 
 
         
-        Debug.DrawRay(playerCamera.p_camera.transform.position, playerCamera.p_camera.transform.forward * 10f, selected_color);
+        Debug.DrawRay(playerCamera.p_camera.transform.position, playerCamera.p_camera.transform.forward * 5f, selected_color);
         selected_color = Color.red;
         lookAtObj = "";
-        if (Physics.Raycast(playerCamera.p_camera.transform.position, playerCamera.p_camera.transform.forward , out RaycastHit hit, 10f))
+        if (Physics.Raycast(playerCamera.p_camera.transform.position, playerCamera.p_camera.transform.forward , out RaycastHit hit, 5f))
         {
             if (hit.collider.CompareTag("Weapon") && !hit.collider.gameObject.GetComponent<Item>().isEquipped)
             {
@@ -109,12 +109,8 @@ public class Player_action : NetworkBehaviour
             rb.interpolation = RigidbodyInterpolation.Interpolate;
             dropped_item.GetComponent<Item>().isEquipped = false;
 
-            dropped_item.GetComponent<Weapon>().TransferData(selected_item_old.GetComponent<Weapon>());
-            
-            
+            dropped_item.GetComponent<Weapon>().TransferData(selected_item_old.GetComponent<Weapon>().Ammo);
             //dropped_item.GetComponent<Rigidbody>().AddForce(Vector3.forward * 15f);
-            
-            
         }
         
     }

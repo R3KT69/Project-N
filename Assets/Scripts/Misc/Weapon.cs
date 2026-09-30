@@ -1,13 +1,14 @@
 using PurrNet;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public class Weapon : NetworkBehaviour
 {
     public int Ammo;
 
-    public void TransferData(Weapon previous)
+    [ObserversRpc]
+    public void TransferData(int old_Ammo)
     {
-        Ammo = previous.Ammo;
+        Ammo = old_Ammo;
     }
 }
 
