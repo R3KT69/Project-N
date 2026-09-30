@@ -27,6 +27,7 @@ public class Player_inventory : NetworkBehaviour
     void Awake()
     {
         selectedItem = Hotbar[0];
+        selectedItem.isEquipped = true;
     }
 
     void Update()
@@ -89,6 +90,7 @@ public class Player_inventory : NetworkBehaviour
         selectedItem = Hotbar[slot];
         selectedHotbarIndex = slot;
         selectedItem.isEquipped = true;
+        
     }
 
 

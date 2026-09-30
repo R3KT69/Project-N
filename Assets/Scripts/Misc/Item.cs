@@ -22,6 +22,7 @@ public class Item : MonoBehaviour
     public int item_count;
     public Image image;
     public bool isEquipped;
+    public int item_order;
 
     
 

@@ -185,6 +185,7 @@ GameObject:
   - component: {fileID: 8259300955962700974}
   - component: {fileID: 5864546619715298708}
   - component: {fileID: 182422277902482451}
+  - component: {fileID: 1058333327279254685}
   m_Layer: 0
   m_Name: hunting_rifle
   m_TagString: Weapon
@@ -226,7 +227,8 @@ MonoBehaviour:
   itemCategory: 1
   item_count: 1
   image: {fileID: 0}
-  isEquipped: 1
+  isEquipped: 0
+  item_order: 0
 --- !u!33 &8259300955962700974
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -301,3 +303,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.36696073, y: 0.05596489, z: 0.012192319}
   m_Center: {x: -0.036438044, y: -0.009377247, z: 0.000030713152}
+--- !u!114 &1058333327279254685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8979620548466737054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 817fe5016bd0a2a49a95b6eb338bb132, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _networkRules: {fileID: 0}
+  _visitiblityRules: {fileID: 0}
+  _isSetup: 0
+  _prefabId: -2147483648
+  _hasPrefabScope: 0
+  _prefabScope: 0
+  _componentIndex: -2147483648
+  _shouldBePooled: 0
+  _parent: {fileID: 0}
+  _invertedPathToNearestParent: 
+  _directChildren: []
+  _syncPosition: 2
+  _syncRotation: 2
+  _syncScale: 1
+  _syncParent: 1
+  _interpolateSettings: 7
+  _minBufferSize: 1
+  _maxBufferSize: 2
+  _characterControllerPatch: 0
+  _ownerAuth: 1
+  _interpolationTiming: 0
+  _adaptiveSynchronization: 2

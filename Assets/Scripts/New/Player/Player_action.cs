@@ -43,7 +43,7 @@ public class Player_action : NetworkBehaviour
 
         GUI.Label(
             new Rect(0, Screen.height / 2f - 15f + 10f, Screen.width, 30f),
-            $"looking_at: {lookAtObj}",
+            $"[{lookAtObj}]",
             style
         );
 
@@ -58,7 +58,7 @@ public class Player_action : NetworkBehaviour
         }
 
         if (animator == null) return;
-        
+
 
         handle_equip_twohanded();
         handle_equip_onehanded();
@@ -69,13 +69,13 @@ public class Player_action : NetworkBehaviour
         
         Debug.DrawRay(playerCamera.p_camera.transform.position, playerCamera.p_camera.transform.forward * 10f, selected_color);
         selected_color = Color.red;
-        lookAtObj = "None";
+        lookAtObj = "";
         if (Physics.Raycast(playerCamera.p_camera.transform.position, playerCamera.p_camera.transform.forward , out RaycastHit hit, 10f))
         {
             if (hit.collider.CompareTag("Weapon") && !hit.collider.gameObject.GetComponent<Item>().isEquipped)
             {
                 Debug.Log("Hit: " + hit.collider.name);
-                lookAtObj = hit.collider.name;
+                lookAtObj = hit.collider.gameObject.GetComponent<Item>().item_name;
                 selected_color = Color.green;
             }
         }
@@ -100,13 +100,14 @@ public class Player_action : NetworkBehaviour
             player_Inventory.Hotbar[player_Inventory.selectedHotbarIndex] = player_Inventory.empty_hand.GetComponent<Item>();
             player_Inventory.selectedItem = player_Inventory.Hotbar[player_Inventory.selectedHotbarIndex];
 
-            GameObject dropped_item = Instantiate(selected_item_old, player_Inventory.throw_item.position, player_Inventory.throw_item.rotation);
+            GameObject dropped_item = Instantiate(ItemDatabase.instance.weapons[selected_item_old.GetComponent<Item>().item_order], player_Inventory.throw_item.position, player_Inventory.throw_item.rotation);
             
             dropped_item.AddComponent<Rigidbody>();
             Rigidbody rb = dropped_item.GetComponent<Rigidbody>();
             rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
             rb.interpolation = RigidbodyInterpolation.Interpolate;
             dropped_item.GetComponent<Item>().isEquipped = false;
+            
             
             //dropped_item.GetComponent<Rigidbody>().AddForce(Vector3.forward * 15f);
             
