@@ -10,7 +10,8 @@ public enum ItemType
 public enum ItemCategory
 {
     OneHanded,
-    TwoHanded
+    TwoHanded,
+    None
 }
 
 public class Item : MonoBehaviour

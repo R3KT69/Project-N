@@ -6,7 +6,10 @@ public class Player_inventory : NetworkBehaviour
 {
     public List<Item> Hotbar;
     public Item selectedItem;
+    public int selectedHotbarIndex;
     public Player_action player_Action;
+    public GameObject empty_hand;
+    public Transform throw_item;
     
 
     void OnGUI()
@@ -65,6 +68,8 @@ public class Player_inventory : NetworkBehaviour
         }
 
         
+
+        
     }
 
     private void SelectItem()
@@ -82,6 +87,7 @@ public class Player_inventory : NetworkBehaviour
     private void RpcSelectedItem(int slot)
     {
         selectedItem = Hotbar[slot];
+        selectedHotbarIndex = slot;
     }
 
 

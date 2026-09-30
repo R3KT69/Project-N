@@ -1,4 +1,5 @@
 using PurrNet;
+using UnityEditor;
 using UnityEngine;
 
 public enum WeaponType
@@ -18,6 +19,7 @@ public class Player_action : NetworkBehaviour
     public bool isAiming = false;
     public GameObject rifle_slot, pistol_slot, rifle_holster, pistol_holster;
 
+
     void Start()
     {
         if (rig_Shifting == null)
@@ -36,11 +38,43 @@ public class Player_action : NetworkBehaviour
         }
 
         if (animator == null) return;
+        
 
         handle_equip_twohanded();
         handle_equip_onehanded();
         handle_unequip();
+        drop_item();
+
         if (!isAiming) rig_Shifting.DisableRig();
+        
+    }
+
+
+    public void drop_item()
+    {
+        if (player_Inventory.selectedItem.itemCategory == ItemCategory.None) return;
+        if (isHolding || isAiming) return;
+
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            GameObject selected_item_old = player_Inventory.selectedItem.gameObject;
+            
+
+            Destroy(player_Inventory.selectedItem.gameObject);
+            player_Inventory.Hotbar[player_Inventory.selectedHotbarIndex] = player_Inventory.empty_hand.GetComponent<Item>();
+            player_Inventory.selectedItem = player_Inventory.Hotbar[player_Inventory.selectedHotbarIndex];
+
+            GameObject dropped_item = Instantiate(selected_item_old, player_Inventory.throw_item.position, player_Inventory.throw_item.rotation);
+            
+            dropped_item.AddComponent<Rigidbody>();
+            Rigidbody rb = dropped_item.GetComponent<Rigidbody>();
+            rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+            rb.interpolation = RigidbodyInterpolation.Interpolate;
+            
+            //dropped_item.GetComponent<Rigidbody>().AddForce(Vector3.forward * 15f);
+            
+            
+        }
         
     }
 
@@ -74,6 +108,8 @@ public class Player_action : NetworkBehaviour
 
     public void handle_equip_twohanded()
     {
+        if (player_Inventory.selectedItem.itemCategory == ItemCategory.None) return;
+        
         if (Input.GetKeyDown(KeyCode.R) && player_Inventory.selectedItem.itemCategory == ItemCategory.TwoHanded)
         {
             if (isAiming) return;
@@ -96,6 +132,8 @@ public class Player_action : NetworkBehaviour
 
     public void handle_equip_onehanded()
     {
+        if (player_Inventory.selectedItem.itemCategory == ItemCategory.None) return;
+        
         if (Input.GetKeyDown(KeyCode.R) && player_Inventory.selectedItem.itemCategory == ItemCategory.OneHanded)
         {
             if (isAiming) return;
@@ -118,7 +156,8 @@ public class Player_action : NetworkBehaviour
     [ObserversRpc]
     private void RpcInvTransferTransform(Transform transform)
     {
-        player_Inventory.selectedItem.transform.SetParent(transform, false);
+        
+        player_Inventory.selectedItem?.transform.SetParent(transform, false);
     }
 
     [ObserversRpc]
