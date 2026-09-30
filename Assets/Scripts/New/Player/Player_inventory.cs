@@ -16,7 +16,7 @@ public class Player_inventory : NetworkBehaviour
     {
         if (!isOwner) return;
         
-        GUI.Label(new Rect(20, 40, 300, 30), $"selected_Item: {selectedItem.item_name} | Ammo: {selectedItem?.GetComponent<Weapon>()?.Ammo}");
+        GUI.Label(new Rect(20, 40, 300, 30), $"selected_Item: {selectedItem?.item_name} | Ammo: {selectedItem?.GetComponent<Weapon>()?.Ammo}");
 
         for (int i = 0; i < 6; i++)
         {
@@ -69,8 +69,15 @@ public class Player_inventory : NetworkBehaviour
             }
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
+                if (selectedItem != null)
+                {
+                    if (selectedItem.GetComponent<Weapon>() != null)
+                    {
+                        selectedItem.GetComponent<Weapon>().ReduceAmmo();
+                    }
+                    
+                }
                 
-                selectedItem.GetComponent<Weapon>().Ammo -= 1;
             }
 
             

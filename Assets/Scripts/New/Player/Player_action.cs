@@ -19,8 +19,11 @@ public class Player_action : NetworkBehaviour
     public bool isHolding = false;
     public bool isAiming = false;
     public GameObject rifle_slot, pistol_slot, rifle_holster, pistol_holster;
+
     private Color selected_color = Color.red;
-    private string lookAtObj;
+    private bool isLooking = false;
+    private string lookAt;
+    public GameObject lookAtObj;
 
     void Start()
     {
@@ -43,7 +46,7 @@ public class Player_action : NetworkBehaviour
 
         GUI.Label(
             new Rect(0, Screen.height / 2f - 15f + 10f, Screen.width, 30f),
-            $"[{lookAtObj}]",
+            $"[{lookAt}]",
             style
         );
 
@@ -64,18 +67,22 @@ public class Player_action : NetworkBehaviour
         handle_equip_onehanded();
         handle_unequip();
         drop_item();
+        pickup_item();
 
 
         
         Debug.DrawRay(playerCamera.p_camera.transform.position, playerCamera.p_camera.transform.forward * 5f, selected_color);
         selected_color = Color.red;
-        lookAtObj = "";
+        lookAt = "";
+        isLooking = false;
         if (Physics.Raycast(playerCamera.p_camera.transform.position, playerCamera.p_camera.transform.forward , out RaycastHit hit, 5f))
         {
             if (hit.collider.CompareTag("Weapon") && !hit.collider.gameObject.GetComponent<Item>().isEquipped)
             {
+                isLooking = true;
                 Debug.Log("Hit: " + hit.collider.name);
-                lookAtObj = hit.collider.gameObject.GetComponent<Item>().item_name;
+                lookAtObj = hit.collider.gameObject;
+                lookAt = lookAtObj.GetComponent<Item>().item_name;
                 selected_color = Color.green;
             }
         }
@@ -94,25 +101,67 @@ public class Player_action : NetworkBehaviour
         if (Input.GetKeyDown(KeyCode.G))
         {
             GameObject selected_item_old = player_Inventory.selectedItem.gameObject;
-            
 
-            Destroy(player_Inventory.selectedItem.gameObject);
-            player_Inventory.Hotbar[player_Inventory.selectedHotbarIndex] = player_Inventory.empty_hand.GetComponent<Item>();
-            player_Inventory.selectedItem = player_Inventory.Hotbar[player_Inventory.selectedHotbarIndex];
+            int item_order = selected_item_old.GetComponent<Item>().item_order;
+            int ammo = selected_item_old.GetComponent<Weapon>().Ammo;
 
-            GameObject dropped_item = Instantiate(ItemDatabase.instance.weapons[selected_item_old.GetComponent<Item>().item_order], player_Inventory.throw_item.position, player_Inventory.throw_item.rotation);
-            
-            //dropped_item.AddComponent<NetworkTransform>();
+            Destroy(selected_item_old);
+
+            player_Inventory.Hotbar[player_Inventory.selectedHotbarIndex] =
+                player_Inventory.empty_hand.GetComponent<Item>();
+
+            player_Inventory.selectedItem =
+                player_Inventory.Hotbar[player_Inventory.selectedHotbarIndex];
+
+            GameObject dropped_item = Instantiate(
+                ItemDatabase.instance.weapons[item_order],
+                player_Inventory.throw_item.position,
+                player_Inventory.throw_item.rotation
+            );
+
             dropped_item.AddComponent<Rigidbody>();
+
             Rigidbody rb = dropped_item.GetComponent<Rigidbody>();
             rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
             rb.interpolation = RigidbodyInterpolation.Interpolate;
+
             dropped_item.GetComponent<Item>().isEquipped = false;
 
-            dropped_item.GetComponent<Weapon>().TransferData(selected_item_old.GetComponent<Weapon>().Ammo);
-            //dropped_item.GetComponent<Rigidbody>().AddForce(Vector3.forward * 15f);
+            dropped_item.GetComponent<Weapon>().TransferData(ammo);
         }
+    }
+
+    public void pickup_item()
+    {
+        if (isHolding || isAiming || !isLooking) return;
+
+        Debug.Log("Trying to pickup");
+
         
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            Debug.Log("Success");
+
+            GameObject new_item = Instantiate(
+            ItemDatabase.instance.weapons[lookAtObj.GetComponent<Item>().item_order],
+            rifle_holster.transform.position,
+            rifle_holster.transform.rotation,
+            rifle_holster.transform
+            );
+
+            int old_ammo = lookAtObj.GetComponent<Weapon>().Ammo;
+
+            new_item.GetComponent<Weapon>().TransferData(old_ammo);
+            
+            Destroy(lookAtObj);
+
+            player_Inventory.selectedItem = new_item.GetComponent<Item>();
+            
+            player_Inventory.Hotbar[0] = new_item.GetComponent<Item>();
+            
+            
+        }
     }
 
     

@@ -10,6 +10,12 @@ public class Weapon : NetworkBehaviour
     {
         Ammo = old_Ammo;
     }
+
+    [ObserversRpc]
+    public void ReduceAmmo()
+    {
+        Ammo -= 1;
+    }
 }
 
 
