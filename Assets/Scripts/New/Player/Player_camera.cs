@@ -68,7 +68,7 @@ public class Player_camera : NetworkBehaviour
 
     void Update()
     {
-        Debug.Log($"p_camera transform:{p_camera.transform.position}\np_camera_default transform:{p_camera_default}");
+        // Debug.Log($"p_camera transform:{p_camera.transform.position}\np_camera_default transform:{p_camera_default}");
     }
 
     void LateUpdate()
