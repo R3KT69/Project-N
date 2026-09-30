@@ -42,7 +42,7 @@ public class Player_action : NetworkBehaviour
         
 
         GUI.Label(
-            new Rect(0, Screen.height / 2f - 15f + 15f, Screen.width, 30f),
+            new Rect(0, Screen.height / 2f - 15f + 10f, Screen.width, 30f),
             $"looking_at: {lookAtObj}",
             style
         );
@@ -72,7 +72,7 @@ public class Player_action : NetworkBehaviour
         lookAtObj = "None";
         if (Physics.Raycast(playerCamera.p_camera.transform.position, playerCamera.p_camera.transform.forward , out RaycastHit hit, 10f))
         {
-            if (hit.collider.CompareTag("Weapon"))
+            if (hit.collider.CompareTag("Weapon") && !hit.collider.gameObject.GetComponent<Item>().isEquipped)
             {
                 Debug.Log("Hit: " + hit.collider.name);
                 lookAtObj = hit.collider.name;
@@ -106,6 +106,7 @@ public class Player_action : NetworkBehaviour
             Rigidbody rb = dropped_item.GetComponent<Rigidbody>();
             rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
             rb.interpolation = RigidbodyInterpolation.Interpolate;
+            dropped_item.GetComponent<Item>().isEquipped = false;
             
             //dropped_item.GetComponent<Rigidbody>().AddForce(Vector3.forward * 15f);
             

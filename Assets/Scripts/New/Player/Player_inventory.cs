@@ -88,6 +88,7 @@ public class Player_inventory : NetworkBehaviour
     {
         selectedItem = Hotbar[slot];
         selectedHotbarIndex = slot;
+        selectedItem.isEquipped = true;
     }
 
 
