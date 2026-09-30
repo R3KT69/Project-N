@@ -12,13 +12,15 @@ public class Player_action : NetworkBehaviour
 {
     public Player_movement player_Movement;
     public Player_inventory player_Inventory;
+    public Player_camera playerCamera;
     public Animator animator;
     public WeaponType weaponType;
     public Rig_shifting rig_Shifting;
     public bool isHolding = false;
     public bool isAiming = false;
     public GameObject rifle_slot, pistol_slot, rifle_holster, pistol_holster;
-
+    private Color selected_color = Color.red;
+    private string lookAtObj;
 
     void Start()
     {
@@ -27,6 +29,24 @@ public class Player_action : NetworkBehaviour
             rig_Shifting = gameObject.GetComponent<Rig_shifting>();
         }
        
+    }
+
+    void OnGUI()
+    {
+        if (!isOwner) return;
+
+        GUIStyle style = new GUIStyle(GUI.skin.label);
+        style.alignment = TextAnchor.MiddleCenter;
+        style.fontSize = 9;
+        style.normal.textColor = selected_color;
+        
+
+        GUI.Label(
+            new Rect(0, Screen.height / 2f - 15f + 15f, Screen.width, 30f),
+            $"looking_at: {lookAtObj}",
+            style
+        );
+
     }
 
 
@@ -44,6 +64,22 @@ public class Player_action : NetworkBehaviour
         handle_equip_onehanded();
         handle_unequip();
         drop_item();
+
+
+        
+        Debug.DrawRay(playerCamera.p_camera.transform.position, playerCamera.p_camera.transform.forward * 10f, selected_color);
+        selected_color = Color.red;
+        lookAtObj = "None";
+        if (Physics.Raycast(playerCamera.p_camera.transform.position, playerCamera.p_camera.transform.forward , out RaycastHit hit, 10f))
+        {
+            if (hit.collider.CompareTag("Weapon"))
+            {
+                Debug.Log("Hit: " + hit.collider.name);
+                lookAtObj = hit.collider.name;
+                selected_color = Color.green;
+            }
+        }
+
 
         if (!isAiming) rig_Shifting.DisableRig();
         

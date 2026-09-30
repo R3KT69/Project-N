@@ -187,7 +187,7 @@ GameObject:
   - component: {fileID: 182422277902482451}
   m_Layer: 0
   m_Name: hunting_rifle
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -226,6 +226,7 @@ MonoBehaviour:
   itemCategory: 1
   item_count: 1
   image: {fileID: 0}
+  isEquipped: 1
 --- !u!33 &8259300955962700974
 MeshFilter:
   m_ObjectHideFlags: 0

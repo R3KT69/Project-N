@@ -4832,6 +4832,7 @@ MonoBehaviour:
   _directChildren: []
   player_Movement: {fileID: 9039855624424223584}
   player_Inventory: {fileID: 4674021931755222137}
+  playerCamera: {fileID: 5844346778534818715}
   animator: {fileID: 3653580797207517873}
   weaponType: 0
   rig_Shifting: {fileID: 2722821639623361278}

@@ -187,7 +187,7 @@ GameObject:
   - component: {fileID: 9070836271037588998}
   m_Layer: 0
   m_Name: flare
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -227,6 +227,7 @@ MonoBehaviour:
   itemCategory: 0
   item_count: 1
   image: {fileID: 0}
+  isEquipped: 1
 --- !u!33 &1472436582819856861
 MeshFilter:
   m_ObjectHideFlags: 0
