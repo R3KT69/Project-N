@@ -109,7 +109,7 @@ public class Player_action : NetworkBehaviour
             rb.interpolation = RigidbodyInterpolation.Interpolate;
             dropped_item.GetComponent<Item>().isEquipped = false;
 
-            dropped_item.GetComponent<Weapon>().Ammo = selected_item_old.GetComponent<Weapon>().Ammo;
+            dropped_item.GetComponent<Weapon>().TransferData(selected_item_old.GetComponent<Weapon>());
             
             
             //dropped_item.GetComponent<Rigidbody>().AddForce(Vector3.forward * 15f);
