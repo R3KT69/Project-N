@@ -181,6 +181,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5320197272316617864}
+  - component: {fileID: -1450715625108607332}
   - component: {fileID: 845412814805782930}
   - component: {fileID: 1472436582819856861}
   - component: {fileID: 921977741861352450}
@@ -212,6 +213,19 @@ Transform:
   - {fileID: 1261558733571952447}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-1450715625108607332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7521228769676029762}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 859c65f790a62b14e90c75dd5acb1f60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Ammo: 5
 --- !u!114 &845412814805782930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -351,8 +365,8 @@ MonoBehaviour:
   _parent: {fileID: 0}
   _invertedPathToNearestParent: 
   _directChildren: []
-  _syncPosition: 1
-  _syncRotation: 1
+  _syncPosition: 2
+  _syncRotation: 2
   _syncScale: 0
   _syncParent: 0
   _interpolateSettings: 7
