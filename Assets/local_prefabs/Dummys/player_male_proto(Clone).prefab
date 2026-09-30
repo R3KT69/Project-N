@@ -4362,7 +4362,7 @@ GameObject:
   - component: {fileID: 1862755301751202434}
   - component: {fileID: 7495142915613916080}
   m_Layer: 0
-  m_Name: player_male_firstpersonaim
+  m_Name: player_male_proto(Clone)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

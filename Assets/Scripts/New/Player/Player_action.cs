@@ -102,6 +102,7 @@ public class Player_action : NetworkBehaviour
 
             GameObject dropped_item = Instantiate(ItemDatabase.instance.weapons[selected_item_old.GetComponent<Item>().item_order], player_Inventory.throw_item.position, player_Inventory.throw_item.rotation);
             
+            //dropped_item.AddComponent<NetworkTransform>();
             dropped_item.AddComponent<Rigidbody>();
             Rigidbody rb = dropped_item.GetComponent<Rigidbody>();
             rb.collisionDetectionMode = CollisionDetectionMode.Continuous;

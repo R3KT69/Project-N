@@ -15,6 +15,7 @@ public class Player_inventory : NetworkBehaviour
     void OnGUI()
     {
         if (!isOwner) return;
+        
         GUI.Label(new Rect(20, 40, 300, 30), $"selected_Item: {selectedItem.item_name}");
 
         for (int i = 0; i < 6; i++)

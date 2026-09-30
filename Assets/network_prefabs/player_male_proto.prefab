@@ -1417,6 +1417,7 @@ MonoBehaviour:
   item_count: 1
   image: {fileID: 0}
   isEquipped: 0
+  item_order: 0
 --- !u!1 &2761490510369891714
 GameObject:
   m_ObjectHideFlags: 0
@@ -4668,7 +4669,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 95595900418224727}
-  - component: {fileID: 1118941010969943487}
   - component: {fileID: 4674021931755222137}
   - component: {fileID: 2722821639623361278}
   - component: {fileID: 5844346778534818715}
@@ -4706,30 +4706,6 @@ Transform:
   - {fileID: 8706341604233730118}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1118941010969943487
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8698589144985593415}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27f4244b2fd936748aa89cb9551cf0f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _networkRules: {fileID: 0}
-  _visitiblityRules: {fileID: 0}
-  _isSetup: 0
-  _prefabId: -2147483648
-  _hasPrefabScope: 0
-  _prefabScope: 0
-  _componentIndex: -2147483648
-  _shouldBePooled: 0
-  _parent: {fileID: 0}
-  _invertedPathToNearestParent: 
-  _directChildren: []
-  cube: {fileID: 3340911357554722212, guid: 7f97ae803c1b4c046beed35467223e78, type: 3}
 --- !u!114 &4674021931755222137
 MonoBehaviour:
   m_ObjectHideFlags: 0
