@@ -67,6 +67,13 @@ public class Player_inventory : NetworkBehaviour
                 RpcSelectedItem(5);
                 //SelectItem();
             }
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                
+                selectedItem.GetComponent<Weapon>().Ammo -= 1;
+            }
+
+            
         }
 
         
