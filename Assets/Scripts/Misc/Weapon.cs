@@ -14,6 +14,14 @@ public class Weapon : NetworkBehaviour
     [ObserversRpc]
     public void ReduceAmmo()
     {
+        Debug.Log(
+            "REDUCE AMMO\n" +
+            "Object: " + gameObject.name +
+            "\nOwner: " + isOwner +
+            "\nServer: " + isServer +
+            "\nSpawned: " + isSpawned
+        );
+
         Ammo -= 1;
     }
 }

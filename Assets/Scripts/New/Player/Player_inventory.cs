@@ -73,7 +73,8 @@ public class Player_inventory : NetworkBehaviour
                 {
                     if (selectedItem.GetComponent<Weapon>() != null)
                     {
-                        selectedItem.GetComponent<Weapon>().ReduceAmmo();
+                        Weapon weapon = selectedItem.GetComponent<Weapon>();
+                        weapon.TransferData(weapon.Ammo-1);
                     }
                     
                 }
@@ -88,16 +89,6 @@ public class Player_inventory : NetworkBehaviour
         
     }
 
-    private void SelectItem()
-    {
-        if (selectedItem.itemCategory == ItemCategory.OneHanded)
-        {
-            player_Action.handle_equip_onehanded();
-        } else if (selectedItem.itemCategory == ItemCategory.TwoHanded)
-        {
-            player_Action.handle_equip_twohanded();
-        }
-    }
 
     [ObserversRpc]
     private void RpcSelectedItem(int slot)

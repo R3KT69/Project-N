@@ -105,7 +105,6 @@ public class Player_action : NetworkBehaviour
             int item_order = selected_item_old.GetComponent<Item>().item_order;
             int ammo = selected_item_old.GetComponent<Weapon>().Ammo;
 
-            Destroy(selected_item_old);
 
             player_Inventory.Hotbar[player_Inventory.selectedHotbarIndex] =
                 player_Inventory.empty_hand.GetComponent<Item>();
@@ -127,8 +126,17 @@ public class Player_action : NetworkBehaviour
 
             dropped_item.GetComponent<Item>().isEquipped = false;
 
-            dropped_item.GetComponent<Weapon>().TransferData(ammo);
+            adjust_ammo(ammo, dropped_item);
+
+            Destroy(selected_item_old);
         }
+    }
+
+    [ObserversRpc]
+    public void adjust_ammo(int ammo, GameObject dropped_item)
+    {
+        Debug.Log($"Ammo to transfer: {ammo}");
+        dropped_item.GetComponent<Weapon>().Ammo = ammo;
     }
 
     public void pickup_item()
@@ -157,7 +165,7 @@ public class Player_action : NetworkBehaviour
             Destroy(lookAtObj);
 
             player_Inventory.selectedItem = new_item.GetComponent<Item>();
-            
+
             player_Inventory.Hotbar[0] = new_item.GetComponent<Item>();
             
             
