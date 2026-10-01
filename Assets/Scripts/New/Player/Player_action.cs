@@ -124,19 +124,21 @@ public class Player_action : NetworkBehaviour
             rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
             rb.interpolation = RigidbodyInterpolation.Interpolate;
 
-            dropped_item.GetComponent<Item>().isEquipped = false;
-
-            adjust_ammo(ammo, dropped_item);
+            
+            AdjustAmmoAndEquipState(ammo, false, dropped_item);
 
             Destroy(selected_item_old);
         }
     }
 
+    
+
     [ObserversRpc]
-    public void adjust_ammo(int ammo, GameObject dropped_item)
+    public void AdjustAmmoAndEquipState(int ammo, bool state, GameObject dropped_item)
     {
         Debug.Log($"Ammo to transfer: {ammo}");
         dropped_item.GetComponent<Weapon>().Ammo = ammo;
+        dropped_item.GetComponent<Item>().isEquipped = state;
     }
 
     public void pickup_item()
@@ -164,9 +166,11 @@ public class Player_action : NetworkBehaviour
             
             Destroy(lookAtObj);
 
-            player_Inventory.selectedItem = new_item.GetComponent<Item>();
+            Item pickup_item = new_item.GetComponent<Item>();
 
-            player_Inventory.Hotbar[0] = new_item.GetComponent<Item>();
+            pickup_item.isEquipped = true;
+            player_Inventory.selectedItem = pickup_item;
+            player_Inventory.Hotbar[0] = pickup_item;
             
             
         }

@@ -1,3 +1,4 @@
+using PurrNet;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,7 +15,7 @@ public enum ItemCategory
     None
 }
 
-public class Item : MonoBehaviour
+public class Item : NetworkBehaviour
 {
     public string item_name;
     public ItemType itemType;
@@ -23,7 +24,6 @@ public class Item : MonoBehaviour
     public Image image;
     public bool isEquipped;
     public int item_order;
-
     
 
 }

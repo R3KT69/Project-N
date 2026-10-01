@@ -225,6 +225,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 859c65f790a62b14e90c75dd5acb1f60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _networkRules: {fileID: 0}
+  _visitiblityRules: {fileID: 0}
+  _isSetup: 0
+  _prefabId: -2147483648
+  _hasPrefabScope: 0
+  _prefabScope: 0
+  _componentIndex: -2147483648
+  _shouldBePooled: 0
+  _parent: {fileID: 0}
+  _invertedPathToNearestParent: 
+  _directChildren: []
   Ammo: 5
 --- !u!114 &845412814805782930
 MonoBehaviour:
@@ -243,7 +254,7 @@ MonoBehaviour:
   itemCategory: 0
   item_count: 1
   image: {fileID: 0}
-  isEquipped: 0
+  isEquipped: 1
   item_order: 0
 --- !u!33 &1472436582819856861
 MeshFilter:
