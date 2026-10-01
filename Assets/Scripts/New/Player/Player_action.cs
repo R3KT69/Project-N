@@ -123,7 +123,9 @@ public class Player_action : NetworkBehaviour
             Rigidbody rb = dropped_item.GetComponent<Rigidbody>();
             rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
             rb.interpolation = RigidbodyInterpolation.Interpolate;
-            rb.AddForce(transform.forward * 2.5f);
+            rb.centerOfMass = Vector3.zero;
+            rb.AddForce(transform.forward * 2f, ForceMode.Impulse);
+
 
             
             AdjustAmmoAndEquipState(ammo, false, dropped_item);

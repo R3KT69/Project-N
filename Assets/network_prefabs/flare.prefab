@@ -249,6 +249,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac340097ebf4b3f4c8316448c56feade, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _networkRules: {fileID: 0}
+  _visitiblityRules: {fileID: 0}
+  _isSetup: 0
+  _prefabId: -2147483648
+  _hasPrefabScope: 0
+  _prefabScope: 0
+  _componentIndex: -2147483648
+  _shouldBePooled: 0
+  _parent: {fileID: 0}
+  _invertedPathToNearestParent: 
+  _directChildren: []
   item_name: flare
   itemType: 1
   itemCategory: 0
@@ -328,8 +339,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.14462887, y: 0.18353799, z: 0.033011865}
-  m_Center: {x: -0.047229335, y: 0.03588337, z: 0.0000021348928}
+  m_Size: {x: 0.1541718, y: 0.18631296, z: 0.033011865}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &-9105575413892044011
 MonoBehaviour:
   m_ObjectHideFlags: 0
