@@ -248,6 +248,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac340097ebf4b3f4c8316448c56feade, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _networkRules: {fileID: 0}
+  _visitiblityRules: {fileID: 0}
+  _isSetup: 0
+  _prefabId: -2147483648
+  _hasPrefabScope: 0
+  _prefabScope: 0
+  _componentIndex: -2147483648
+  _shouldBePooled: 0
+  _parent: {fileID: 0}
+  _invertedPathToNearestParent: 
+  _directChildren: []
   item_name: RIfle
   itemType: 1
   itemCategory: 1
