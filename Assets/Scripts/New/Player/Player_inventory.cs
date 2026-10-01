@@ -80,6 +80,10 @@ public class Player_inventory : NetworkBehaviour
                 }
                 
             }
+            if (Input.GetKeyDown(KeyCode.U))
+            {
+                Debug.Log($"Empty hotbar: {GetEmptyHandIndex()}");
+            }
 
             
         }
@@ -87,6 +91,19 @@ public class Player_inventory : NetworkBehaviour
         
 
         
+    }
+
+    public int GetEmptyHandIndex()
+    {
+        for (int i = 0; i < Hotbar.Count; i++)
+        {
+            if (Hotbar[i].itemCategory == ItemCategory.None)
+            {
+                return i;
+            }
+        }
+
+        return -1;
     }
 
 

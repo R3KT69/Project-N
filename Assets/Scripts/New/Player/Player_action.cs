@@ -131,8 +131,6 @@ public class Player_action : NetworkBehaviour
         }
     }
 
-    
-
     [ObserversRpc]
     public void AdjustAmmoAndEquipState(int ammo, bool state, GameObject dropped_item)
     {
@@ -152,29 +150,47 @@ public class Player_action : NetworkBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             Debug.Log("Success");
+            Transform holster_position = null;
+
+            if (lookAtObj.GetComponent<Item>().itemCategory == ItemCategory.OneHanded)
+            {
+                holster_position = pistol_holster.transform;
+            } else if (lookAtObj.GetComponent<Item>().itemCategory == ItemCategory.TwoHanded)
+            {
+                holster_position = rifle_holster.transform;
+            }
 
             GameObject new_item = Instantiate(
             ItemDatabase.instance.weapons[lookAtObj.GetComponent<Item>().item_order],
-            rifle_holster.transform.position,
-            rifle_holster.transform.rotation,
-            rifle_holster.transform
+            holster_position.transform.position,
+            holster_position.transform.rotation,
+            holster_position.transform
             );
 
             int old_ammo = lookAtObj.GetComponent<Weapon>().Ammo;
 
             new_item.GetComponent<Weapon>().TransferData(old_ammo);
             
+           int emptyHandIndex = player_Inventory.GetEmptyHandIndex();
+
             Destroy(lookAtObj);
 
-            Item pickup_item = new_item.GetComponent<Item>();
-
-            pickup_item.isEquipped = true;
-            player_Inventory.selectedItem = pickup_item;
-            player_Inventory.Hotbar[0] = pickup_item;
-            
+            RpcPickupItem(new_item, emptyHandIndex);
             
         }
     }
+
+    [ObserversRpc]
+    private void RpcPickupItem(GameObject new_item, int slot)
+    {
+        Item item = new_item.GetComponent<Item>();
+
+        player_Inventory.Hotbar[slot] = item;
+        player_Inventory.selectedItem = item;
+        item.isEquipped = true;
+    }
+
+    
 
     
 
@@ -254,8 +270,10 @@ public class Player_action : NetworkBehaviour
     [ObserversRpc]
     private void RpcInvTransferTransform(Transform transform)
     {
-        
-        player_Inventory.selectedItem?.transform.SetParent(transform, false);
+        if (player_Inventory.selectedItem == null)
+            return;
+
+        player_Inventory.selectedItem.transform.SetParent(transform, false);
     }
 
     [ObserversRpc]
