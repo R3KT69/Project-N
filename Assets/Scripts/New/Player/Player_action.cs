@@ -123,6 +123,7 @@ public class Player_action : NetworkBehaviour
             Rigidbody rb = dropped_item.GetComponent<Rigidbody>();
             rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
             rb.interpolation = RigidbodyInterpolation.Interpolate;
+            rb.AddForce(transform.forward * 2.5f);
 
             
             AdjustAmmoAndEquipState(ammo, false, dropped_item);
@@ -187,6 +188,7 @@ public class Player_action : NetworkBehaviour
 
         player_Inventory.Hotbar[slot] = item;
         player_Inventory.selectedItem = item;
+        player_Inventory.selectedHotbarIndex = slot;
         item.isEquipped = true;
     }
 

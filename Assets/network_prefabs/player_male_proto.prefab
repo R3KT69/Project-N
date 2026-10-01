@@ -1411,6 +1411,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac340097ebf4b3f4c8316448c56feade, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _networkRules: {fileID: 0}
+  _visitiblityRules: {fileID: 0}
+  _isSetup: 0
+  _prefabId: -2147483648
+  _hasPrefabScope: 0
+  _prefabScope: 0
+  _componentIndex: -2147483648
+  _shouldBePooled: 0
+  _parent: {fileID: 0}
+  _invertedPathToNearestParent: 
+  _directChildren: []
   item_name: RIfle
   itemType: 1
   itemCategory: 1
@@ -4470,13 +4481,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7971504509021562048}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.539}
+  m_LocalRotation: {x: 0.70710576, y: -0, z: -0, w: 0.70710784}
+  m_LocalPosition: {x: 0.178, y: 0, z: 0.234}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 95595900418224727}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &8115331691579074642
 GameObject:
   m_ObjectHideFlags: 0
@@ -4844,6 +4855,7 @@ MonoBehaviour:
   pistol_slot: {fileID: 8948693824392043462}
   rifle_holster: {fileID: 4277213391741823221}
   pistol_holster: {fileID: 5123713279672309296}
+  lookAtObj: {fileID: 0}
 --- !u!114 &9039855624424223584
 MonoBehaviour:
   m_ObjectHideFlags: 0
