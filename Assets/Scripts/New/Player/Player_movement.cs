@@ -15,6 +15,7 @@ public class Player_movement : NetworkBehaviour
     [Range(1f, 10.0f)] public float sprint_speed = 12;
     [Range(1f, 10.0f)] public float rotation_speed = 10f;
     [Range(1f, 10.0f)] public float jump_force = 10f;
+    public float movement_smooth = 10f;
     public bool isGrounded = false;
     public bool isCrouched = false;
     public bool isInEditor = false;
@@ -64,8 +65,24 @@ public class Player_movement : NetworkBehaviour
         if (Input.GetKey(KeyCode.S)) input_vector += Vector3.back; 
         if (Input.GetKey(KeyCode.D)) input_vector += Vector3.right; 
 
+        /* // Instant Movement
         bool isMoving = input_vector.sqrMagnitude > 0.01f;
         movement_speed = isMoving ? GetTargetMoveSpeed() : 0f;
+        */
+
+        // Gradual movement
+
+        bool isMoving = input_vector.sqrMagnitude > 0.01f;
+
+        float targetMoveSpeed = isMoving ? GetTargetMoveSpeed() : 0f;
+
+        movement_speed = Mathf.MoveTowards(
+            movement_speed,
+            targetMoveSpeed,
+            movement_smooth * Time.deltaTime
+        );
+
+
 
         // --- CALCULATE ANIMATOR PARAMETERS ---
 
