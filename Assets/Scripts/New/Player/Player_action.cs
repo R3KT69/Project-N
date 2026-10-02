@@ -112,6 +112,8 @@ public class Player_action : NetworkBehaviour
             player_Inventory.selectedItem =
                 player_Inventory.Hotbar[player_Inventory.selectedHotbarIndex];
 
+
+            SetEmptyHotbar(player_Inventory.selectedHotbarIndex);
             DetatchWeapon(selected_item_old);
 
             selected_item_old.AddComponent<Rigidbody>();
@@ -122,11 +124,19 @@ public class Player_action : NetworkBehaviour
             //rb.centerOfMass = Vector3.zero;
             //rb.AddForce(transform.forward * 2f, ForceMode.Impulse);
 
-            selected_item_old.GetComponent<Item>().isEquipped = false;
+            //selected_item_old.GetComponent<Item>().isEquipped = false;
             //AdjustAmmoAndEquipState(ammo, false, dropped_item);
 
             
         }
+    }
+
+    [ObserversRpc]
+    public void SetEmptyHotbar(int index)
+    {
+        player_Inventory.selectedItem = player_Inventory.empty_hand.GetComponent<Item>();
+        player_Inventory.selectedHotbarIndex = index;
+        player_Inventory.Hotbar[player_Inventory.selectedHotbarIndex] = player_Inventory.selectedItem;
     }
 
     [ObserversRpc]
@@ -137,6 +147,8 @@ public class Player_action : NetworkBehaviour
             player_Inventory.throw_item.position,
             player_Inventory.throw_item.rotation
         );
+
+        selected_item.GetComponent<Item>().isEquipped = false;
     }
 
     [ObserversRpc]
@@ -157,6 +169,8 @@ public class Player_action : NetworkBehaviour
             rifle_holster.transform.rotation
             );
         }
+
+        Destroy(selected_item.GetComponent<Rigidbody>());
     
     }
 
@@ -170,7 +184,7 @@ public class Player_action : NetworkBehaviour
 
         if (Input.GetKeyDown(KeyCode.F))
         {
-            
+            int free_index = player_Inventory.GetEmptyHandIndex();
             string flag = "none";
 
             if (lookAtObj.GetComponent<Item>().itemCategory == ItemCategory.OneHanded)
@@ -183,8 +197,19 @@ public class Player_action : NetworkBehaviour
 
             AttachWeapon(lookAtObj, flag);
 
+            SetItemHotbar(lookAtObj.GetComponent<Item>(), free_index);
+            
+
             Debug.Log("Success");
         }
+    }
+
+    [ObserversRpc]
+    public void SetItemHotbar(Item item, int index)
+    {
+        player_Inventory.selectedItem = item;
+        player_Inventory.selectedHotbarIndex = index;
+        player_Inventory.Hotbar[player_Inventory.selectedHotbarIndex] = player_Inventory.selectedItem;
     }
 
 

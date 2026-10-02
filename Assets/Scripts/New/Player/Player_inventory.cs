@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using PurrNet;
 using UnityEngine;
@@ -28,7 +29,7 @@ public class Player_inventory : NetworkBehaviour
     void Awake()
     {
         selectedItem = Hotbar[0];
-        selectedItem.isEquipped = true;
+        //selectedItem.isEquipped = true;
     }
 
     void Update()
@@ -113,6 +114,23 @@ public class Player_inventory : NetworkBehaviour
 
         return -1;
     }
+
+    [ObserversRpc]
+    public void SelectEmptyHand()
+    {
+        selectedItem = empty_hand.GetComponent<Item>();
+    }
+
+    /*
+    [ObserversRpc]
+    public void SetItemHotbar(Item item, int index)
+    {
+        selectedItem = item;
+        selectedHotbarIndex = index;
+        Hotbar[selectedHotbarIndex] = selectedItem;
+    }*/
+
+    
 
 
     [ObserversRpc]
