@@ -131,6 +131,39 @@ public class Player_action : NetworkBehaviour
         }
     }
 
+
+    public void pickup_item_exp()
+    {
+        if (isHolding || isAiming || !isLooking) return;
+
+        Debug.Log("Trying to pickup");
+
+        
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            int free_index = player_Inventory.GetEmptyHandIndex();
+            string flag = "none";
+
+            if (lookAtObj.GetComponent<Item>().itemCategory == ItemCategory.OneHanded)
+            {
+                flag = "Pistol";
+            } else if (lookAtObj.GetComponent<Item>().itemCategory == ItemCategory.TwoHanded)
+            {
+                flag = "Rifle";
+            }
+
+            AttachWeapon(lookAtObj, flag);
+
+            SetItemHotbar(lookAtObj.GetComponent<Item>(), free_index);
+            
+            lookAtObj.GetComponent<NetworkIdentity>().GiveOwnership(localPlayer);
+            lookAtObj.GetComponent<Item>().isEquipped = true;
+
+            Debug.Log($"Success. Given item {lookAtObj.name} to playerid: {localPlayer}");
+        }
+    }
+
     [ObserversRpc]
     public void SetEmptyHotbar(int index)
     {
@@ -175,37 +208,6 @@ public class Player_action : NetworkBehaviour
     
     }
 
-    public void pickup_item_exp()
-    {
-        if (isHolding || isAiming || !isLooking) return;
-
-        Debug.Log("Trying to pickup");
-
-        
-
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            int free_index = player_Inventory.GetEmptyHandIndex();
-            string flag = "none";
-
-            if (lookAtObj.GetComponent<Item>().itemCategory == ItemCategory.OneHanded)
-            {
-                flag = "Pistol";
-            } else if (lookAtObj.GetComponent<Item>().itemCategory == ItemCategory.TwoHanded)
-            {
-                flag = "Rifle";
-            }
-
-            AttachWeapon(lookAtObj, flag);
-
-            SetItemHotbar(lookAtObj.GetComponent<Item>(), free_index);
-            
-            lookAtObj.GetComponent<NetworkIdentity>().GiveOwnership(localPlayer);
-
-            Debug.Log("Success");
-        }
-    }
-
     [ObserversRpc]
     public void SetItemHotbar(Item item, int index)
     {
@@ -214,7 +216,9 @@ public class Player_action : NetworkBehaviour
         player_Inventory.Hotbar[player_Inventory.selectedHotbarIndex] = player_Inventory.selectedItem;
     }
 
+    // drop_item and pickup_item below only works for offline instances. Dont use them
 
+    /*
     public void drop_item()
     {
         if (player_Inventory.selectedItem.itemCategory == ItemCategory.None) return;
@@ -254,7 +258,7 @@ public class Player_action : NetworkBehaviour
 
             Destroy(selected_item_old);
         }
-    }
+    }*/
 
     /*
     [ObserversRpc]
@@ -265,6 +269,7 @@ public class Player_action : NetworkBehaviour
         dropped_item.GetComponent<Item>().isEquipped = state;
     }*/
 
+    /*
     public void pickup_item()
     {
         if (isHolding || isAiming || !isLooking) return;
@@ -303,7 +308,7 @@ public class Player_action : NetworkBehaviour
             //RpcPickupItem(new_item, emptyHandIndex);
             Destroy(lookAtObj);
         }
-    }
+    }*/
 
     /*
     [ObserversRpc]
@@ -341,7 +346,7 @@ public class Player_action : NetworkBehaviour
     }
     */
 
-    
+    // drop_item and pickup_item above only works for offline instances. Dont use them
 
     public void handle_unequip()
     {
