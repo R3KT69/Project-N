@@ -36,7 +36,7 @@ public class Network_connection : MonoBehaviour
     public void Exec_conn()
     {
         server_ip = string.IsNullOrWhiteSpace(server_ip_field.text) ? DefaultIp : server_ip_field.text;
-        server_port = string.IsNullOrWhiteSpace(server_port_field.text) ? DefaultIp : server_port_field.text;
+        server_port = string.IsNullOrWhiteSpace(server_port_field.text) ? DefaultPort : server_port_field.text;
 
         start_client = true;
         Debug.Log($"Connecting to ip:  {server_ip}");
