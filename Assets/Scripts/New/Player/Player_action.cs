@@ -171,6 +171,7 @@ public class Player_action : NetworkBehaviour
         }
 
         Destroy(selected_item.GetComponent<Rigidbody>());
+         
     
     }
 
@@ -199,6 +200,7 @@ public class Player_action : NetworkBehaviour
 
             SetItemHotbar(lookAtObj.GetComponent<Item>(), free_index);
             
+            lookAtObj.GetComponent<NetworkIdentity>().GiveOwnership(localPlayer);
 
             Debug.Log("Success");
         }
