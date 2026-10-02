@@ -23,14 +23,14 @@ public class PlayerCamera : MonoBehaviour
     private float yAngle = 15f;
 
     private Transform playerTransform;
-    private Animator animator;
+    
     private Vector3 currentShoulderOffset = Vector3.zero;
     private float aimBlend = 0f; 
 
     void Start()
     {
         playerTransform = transform.parent;
-        animator = GetComponentInParent<Animator>();
+        
 
         if (playerTransform == null)
         {
@@ -53,36 +53,19 @@ public class PlayerCamera : MonoBehaviour
         yAngle = Mathf.Clamp(yAngle, minYAngle, maxYAngle);
 
         // Shoulder Snapping
-        if (Input.GetKeyDown(KeyCode.LeftAlt))
-        {
-            isOffsetFlipped = !isOffsetFlipped;
-            aimingOffset = new Vector3(
-                isOffsetFlipped ? -Mathf.Abs(aimingOffset.x) : Mathf.Abs(aimingOffset.x),
-                aimingOffset.y,
-                aimingOffset.z
-            );
-        }
+        
 
         Quaternion camRotation = Quaternion.Euler(yAngle, xAngle, 0f);
 
-        bool isAiming = animator.GetBool("isAiming");
+    
 
         // Smooth blend factor for aim transition
-        float targetBlend = isAiming ? 1f : 0f;
-        aimBlend = Mathf.MoveTowards(aimBlend, targetBlend, Time.deltaTime * offsetTransitionSpeed);
+        
 
         // Compute world-space offsets
-        Vector3 orbitWorldOffset = orbitOffset;
-        Vector3 aimingWorldOffset = camRotation * aimingOffset;
-        Vector3 targetOffset = Vector3.Lerp(orbitWorldOffset, aimingWorldOffset, aimBlend);
+        
 
-        currentShoulderOffset = Vector3.Lerp(currentShoulderOffset, targetOffset, Time.deltaTime * aimingShoulderSnapSpeed);
-
-        if (isAiming)
-        {
-            Quaternion targetRotation = Quaternion.Euler(0f, xAngle, 0f);
-            playerTransform.rotation = Quaternion.Slerp(playerTransform.rotation, targetRotation, Time.deltaTime * bodyRotationSpeed);
-        }
+        
 
         Vector3 camPosition = playerTransform.position + baseOffset + currentShoulderOffset - camRotation * Vector3.forward * distance;
 

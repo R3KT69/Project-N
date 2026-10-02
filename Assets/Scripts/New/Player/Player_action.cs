@@ -132,6 +132,8 @@ public class Player_action : NetworkBehaviour
     }
 
 
+    // need to remove rigidbody when its picked up..
+
     public void pickup_item_exp()
     {
         if (isHolding || isAiming || !isLooking) return;
