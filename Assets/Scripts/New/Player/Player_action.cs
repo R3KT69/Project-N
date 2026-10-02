@@ -66,8 +66,10 @@ public class Player_action : NetworkBehaviour
         handle_equip_twohanded();
         handle_equip_onehanded();
         handle_unequip();
-        drop_item();
-        pickup_item();
+        //drop_item();
+        drop_item_exp();
+        pickup_item_exp();
+        //pickup_item();
 
 
         
@@ -90,6 +92,99 @@ public class Player_action : NetworkBehaviour
 
         if (!isAiming) rig_Shifting.DisableRig();
         
+    }
+
+    public void drop_item_exp()
+    {
+        if (player_Inventory.selectedItem.itemCategory == ItemCategory.None) return;
+        if (isHolding || isAiming) return;
+
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            GameObject selected_item_old = player_Inventory.selectedItem.gameObject;
+
+            //int item_order = selected_item_old.GetComponent<Item>().item_order;
+            //int ammo = selected_item_old.GetComponent<Weapon>().Ammo;
+
+            player_Inventory.Hotbar[player_Inventory.selectedHotbarIndex] =
+                player_Inventory.empty_hand.GetComponent<Item>();
+
+            player_Inventory.selectedItem =
+                player_Inventory.Hotbar[player_Inventory.selectedHotbarIndex];
+
+            DetatchWeapon(selected_item_old);
+
+            selected_item_old.AddComponent<Rigidbody>();
+
+            Rigidbody rb = selected_item_old.GetComponent<Rigidbody>();
+            rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+            rb.interpolation = RigidbodyInterpolation.Interpolate;
+            //rb.centerOfMass = Vector3.zero;
+            //rb.AddForce(transform.forward * 2f, ForceMode.Impulse);
+
+            selected_item_old.GetComponent<Item>().isEquipped = false;
+            //AdjustAmmoAndEquipState(ammo, false, dropped_item);
+
+            
+        }
+    }
+
+    [ObserversRpc]
+    private void DetatchWeapon(GameObject selected_item)
+    {
+        selected_item.transform.SetParent(null);
+        selected_item.transform.SetPositionAndRotation(
+            player_Inventory.throw_item.position,
+            player_Inventory.throw_item.rotation
+        );
+    }
+
+    [ObserversRpc]
+    private void AttachWeapon(GameObject selected_item, string flag)
+    {
+        if (flag == "Pistol")
+        {
+            selected_item.transform.SetParent(pistol_holster.transform);
+            selected_item.transform.SetPositionAndRotation(
+            pistol_holster.transform.position,
+            pistol_holster.transform.rotation
+            );
+        } else if (flag == "Rifle")
+        {
+            selected_item.transform.SetParent(rifle_holster.transform);
+            selected_item.transform.SetPositionAndRotation(
+            rifle_holster.transform.position,
+            rifle_holster.transform.rotation
+            );
+        }
+    
+    }
+
+    public void pickup_item_exp()
+    {
+        if (isHolding || isAiming || !isLooking) return;
+
+        Debug.Log("Trying to pickup");
+
+        
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            
+            string flag = "none";
+
+            if (lookAtObj.GetComponent<Item>().itemCategory == ItemCategory.OneHanded)
+            {
+                flag = "Pistol";
+            } else if (lookAtObj.GetComponent<Item>().itemCategory == ItemCategory.TwoHanded)
+            {
+                flag = "Rifle";
+            }
+
+            AttachWeapon(lookAtObj, flag);
+
+            Debug.Log("Success");
+        }
     }
 
 
@@ -128,19 +223,20 @@ public class Player_action : NetworkBehaviour
 
 
             
-            AdjustAmmoAndEquipState(ammo, false, dropped_item);
+            //AdjustAmmoAndEquipState(ammo, false, dropped_item);
 
             Destroy(selected_item_old);
         }
     }
 
+    /*
     [ObserversRpc]
     public void AdjustAmmoAndEquipState(int ammo, bool state, GameObject dropped_item)
     {
         Debug.Log($"Ammo to transfer: {ammo}");
         dropped_item.GetComponent<Weapon>().Ammo = ammo;
         dropped_item.GetComponent<Item>().isEquipped = state;
-    }
+    }*/
 
     public void pickup_item()
     {
@@ -176,25 +272,47 @@ public class Player_action : NetworkBehaviour
             
            int emptyHandIndex = player_Inventory.GetEmptyHandIndex();
 
-            Destroy(lookAtObj);
 
-            RpcPickupItem(new_item, emptyHandIndex);
-            
+            //RpcPickupItem(new_item, emptyHandIndex);
+            Destroy(lookAtObj);
         }
     }
 
+    /*
     [ObserversRpc]
     private void RpcPickupItem(GameObject new_item, int slot)
     {
+        Debug.Log(
+            $"PICKUP RPC | player={gameObject.name} | " +
+            $"new_item={new_item} | slot={slot}"
+        );
+
+        if (new_item == null)
+        {
+            Debug.LogError("new_item is NULL on " + gameObject.name);
+            return;
+        }
+
+        if (player_Inventory == null)
+        {
+            Debug.LogError("player_Inventory is NULL on " + gameObject.name);
+            return;
+        }
+
         Item item = new_item.GetComponent<Item>();
+
+        if (item == null)
+        {
+            Debug.LogError("Item component is NULL on " + gameObject.name);
+            return;
+        }
 
         player_Inventory.Hotbar[slot] = item;
         player_Inventory.selectedItem = item;
         player_Inventory.selectedHotbarIndex = slot;
         item.isEquipped = true;
     }
-
-    
+    */
 
     
 

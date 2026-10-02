@@ -33,7 +33,15 @@ public class Player_inventory : NetworkBehaviour
 
     void Update()
     {
+        if (selectedItem == null)
+        {
+            Debug.Log($"Selected item got null on {gameObject.name}");
+            selectedItem = empty_hand.GetComponent<Item>();
+        }
+
         if (!isOwner) return;
+
+        
 
         if (!player_Action.isHolding)
         {

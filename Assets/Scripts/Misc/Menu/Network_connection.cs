@@ -11,6 +11,7 @@ public class Network_connection : MonoBehaviour
     public static string server_ip;
     public static bool start_host = false;
     public static bool start_client = false;
+    public string DefaultIp;
 
     
 
@@ -22,7 +23,8 @@ public class Network_connection : MonoBehaviour
 
     public void Exec_host()
     {
-        server_ip = inputField.text;
+        server_ip = string.IsNullOrWhiteSpace(inputField.text) ? DefaultIp : inputField.text;
+        
         start_host = true;
         Debug.Log($"Hosting, ip:  {server_ip}");
         SceneManager.LoadScene("Test");
@@ -30,7 +32,8 @@ public class Network_connection : MonoBehaviour
 
     public void Exec_conn()
     {
-        server_ip = inputField.text;
+        server_ip = string.IsNullOrWhiteSpace(inputField.text) ? DefaultIp : inputField.text;
+
         start_client = true;
         Debug.Log($"Connecting to ip:  {server_ip}");
         SceneManager.LoadScene("Test");

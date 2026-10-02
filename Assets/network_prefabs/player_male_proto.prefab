@@ -4751,7 +4751,7 @@ MonoBehaviour:
   selectedItem: {fileID: 0}
   selectedHotbarIndex: 0
   player_Action: {fileID: 6441515780742013989}
-  empty_hand: {fileID: 5318497645112064533}
+  empty_hand: {fileID: 2896244424140610861, guid: 5b5d534e2999a394982a6f13a2f7b69d, type: 3}
   throw_item: {fileID: 8706341604233730118}
 --- !u!114 &2722821639623361278
 MonoBehaviour:
@@ -5294,10 +5294,5 @@ PrefabInstance:
 --- !u!4 &3701494813611557695 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5953976906343261191, guid: 5b5d534e2999a394982a6f13a2f7b69d, type: 3}
-  m_PrefabInstance: {fileID: 7061256743233038136}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5318497645112064533 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2896244424140610861, guid: 5b5d534e2999a394982a6f13a2f7b69d, type: 3}
   m_PrefabInstance: {fileID: 7061256743233038136}
   m_PrefabAsset: {fileID: 0}
