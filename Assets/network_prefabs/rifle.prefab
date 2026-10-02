@@ -189,7 +189,7 @@ GameObject:
   - component: {fileID: 6109635280657846935}
   - component: {fileID: -2982614528619105467}
   m_Layer: 0
-  m_Name: hunting_rifle
+  m_Name: rifle
   m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -259,7 +259,7 @@ MonoBehaviour:
   _parent: {fileID: 0}
   _invertedPathToNearestParent: 
   _directChildren: []
-  item_name: RIfle
+  item_name: Rifle
   itemType: 1
   itemCategory: 1
   item_count: 1
