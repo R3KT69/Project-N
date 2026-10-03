@@ -121,8 +121,11 @@ public class Player_action : NetworkBehaviour
             Rigidbody rb = selected_item_old.GetComponent<Rigidbody>();
             rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
             rb.interpolation = RigidbodyInterpolation.Interpolate;
+            rb.automaticCenterOfMass = false;
+            rb.automaticInertiaTensor = false;
+            
             //rb.centerOfMass = Vector3.zero;
-            //rb.AddForce(transform.forward * 2f, ForceMode.Impulse);
+            //rb.AddForce(transform.forward * 2f, ForceMode.Impulse); // drop motion
 
             //selected_item_old.GetComponent<Item>().isEquipped = false;
             //AdjustAmmoAndEquipState(ammo, false, dropped_item);
@@ -178,10 +181,11 @@ public class Player_action : NetworkBehaviour
     private void DetatchWeapon(GameObject selected_item)
     {
         selected_item.transform.SetParent(null);
+        /*
         selected_item.transform.SetPositionAndRotation(
             player_Inventory.throw_item.position,
             player_Inventory.throw_item.rotation
-        );
+        );*/
 
         selected_item.GetComponent<Item>().isEquipped = false;
     }

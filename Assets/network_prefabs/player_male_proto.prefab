@@ -888,7 +888,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 1
+  m_RenderPostProcessing: 0
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -4679,6 +4679,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 95595900418224727}
+  - component: {fileID: 7183294033707992463}
   - component: {fileID: 4674021931755222137}
   - component: {fileID: 2722821639623361278}
   - component: {fileID: 5844346778534818715}
@@ -4716,6 +4717,31 @@ Transform:
   - {fileID: 8706341604233730118}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7183294033707992463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8698589144985593415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50c0efe76b87ec0419d07e9dea416340, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _networkRules: {fileID: 0}
+  _visitiblityRules: {fileID: 0}
+  _isSetup: 0
+  _prefabId: -2147483648
+  _hasPrefabScope: 0
+  _prefabScope: 0
+  _componentIndex: -2147483648
+  _shouldBePooled: 0
+  _parent: {fileID: 0}
+  _invertedPathToNearestParent: 
+  _directChildren: []
+  player_Action: {fileID: 0}
+  player_Inventory: {fileID: 0}
 --- !u!114 &4674021931755222137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4881,9 +4907,9 @@ MonoBehaviour:
   character_model: {fileID: 95595900418224727}
   player_anim: {fileID: 3653580797207517873}
   movement_speed: 0
-  default_speed: 3.6
+  default_speed: 2
   crouched_speed: 1.2
-  sprint_speed: 4.2
+  sprint_speed: 4
   rotation_speed: 10
   jump_force: 8
   movement_smooth: 10

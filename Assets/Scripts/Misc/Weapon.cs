@@ -4,6 +4,11 @@ using UnityEngine;
 public class Weapon : NetworkBehaviour
 {
     public int Ammo;
+    public GameObject muzzleFlash;
+    public Transform shootpoint;
+
+    
+
 
     [ObserversRpc]
     public void TransferData(int old_Ammo)
