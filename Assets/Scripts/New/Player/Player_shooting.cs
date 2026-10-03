@@ -16,14 +16,23 @@ public class Player_shooting : NetworkBehaviour
     void Update()
     {
         if (!isOwner) return;
-        
+
         if (player_Action.isAiming)
         {
+            Weapon selected_weapon = player_Inventory.selectedItem.GetComponent<Weapon>();
             if (Input.GetMouseButtonDown(0))
             {
-                Debug.Log("Shooting.");
-                Debug.Log($"got weapon: {player_Inventory.selectedItem.name}");
+                InitiateShooting(selected_weapon);
+
             }
         }
+    }
+
+    [ObserversRpc]
+    public void InitiateShooting(Weapon selected_weapon)
+    {
+        Debug.Log("Shooting.");
+        Debug.Log($"got weapon: {selected_weapon.name}");
+        selected_weapon.muzzleFlash.Play();
     }
 }

@@ -4907,9 +4907,9 @@ MonoBehaviour:
   character_model: {fileID: 95595900418224727}
   player_anim: {fileID: 3653580797207517873}
   movement_speed: 0
-  default_speed: 2
+  default_speed: 3.4
   crouched_speed: 1.2
-  sprint_speed: 4
+  sprint_speed: 4.5
   rotation_speed: 10
   jump_force: 8
   movement_smooth: 10

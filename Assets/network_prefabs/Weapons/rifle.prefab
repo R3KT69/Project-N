@@ -269,6 +269,8 @@ MonoBehaviour:
   _invertedPathToNearestParent: 
   _directChildren: []
   Ammo: 5
+  muzzleFlash: {fileID: 3017800251873822945}
+  shootpoint: {fileID: 3590499427297196016}
 --- !u!114 &6740492768777886967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -499,6 +501,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d63f6e8c74f93d54c867537aee3042e7, type: 3}
+--- !u!198 &3017800251873822945 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7931074159759410764, guid: d63f6e8c74f93d54c867537aee3042e7, type: 3}
+  m_PrefabInstance: {fileID: 5184123358844505773}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3585834247797365695 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8517087022897108242, guid: d63f6e8c74f93d54c867537aee3042e7, type: 3}

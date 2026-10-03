@@ -4,10 +4,10 @@ using UnityEngine;
 public class Weapon : NetworkBehaviour
 {
     public int Ammo;
-    public GameObject muzzleFlash;
+    public ParticleSystem muzzleFlash;
     public Transform shootpoint;
 
-    
+
 
 
     [ObserversRpc]
