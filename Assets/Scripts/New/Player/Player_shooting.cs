@@ -23,7 +23,7 @@ public class Player_shooting : NetworkBehaviour
             if (Input.GetMouseButtonDown(0))
             {
                 InitiateShooting(selected_weapon);
-
+                //Instantiate()
             }
         }
     }
@@ -33,6 +33,26 @@ public class Player_shooting : NetworkBehaviour
     {
         Debug.Log("Shooting.");
         Debug.Log($"got weapon: {selected_weapon.name}");
-        selected_weapon.muzzleFlash.Play();
+
+        selected_weapon.PlaySFX();
+        selected_weapon.PlayVFX();
+
+        if (isOwner)
+        {
+            if (selected_weapon.weaponType == WeaponClass.SemiAutomatic)
+            {
+                selected_weapon.RifleFire();
+            }
+            else if (selected_weapon.weaponType == WeaponClass.Automatic)
+            {
+                selected_weapon.AutomaticFire(5);
+            }
+            else if (selected_weapon.weaponType == WeaponClass.Shotgun)
+            {
+                selected_weapon.ShotgunFire(5, 5);
+            }
+            
+        }
+        
     }
 }

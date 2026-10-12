@@ -270,7 +270,9 @@ MonoBehaviour:
   _directChildren: []
   Ammo: 5
   muzzleFlash: {fileID: 7256395510803516730}
+  bullet_obj: {fileID: 5249904446823242199, guid: 4710480083e088540b0024ee35d49430, type: 3}
   shootpoint: {fileID: 5954580781529135960}
+  audioSource: {fileID: 0}
 --- !u!114 &6740492768777886967
 MonoBehaviour:
   m_ObjectHideFlags: 0
