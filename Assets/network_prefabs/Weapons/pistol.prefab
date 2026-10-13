@@ -181,6 +181,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8958931085329324019}
+  - component: {fileID: 623534275400461781}
   m_Layer: 0
   m_Name: ShootPoint
   m_TagString: Untagged
@@ -203,6 +204,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5320197272316617864}
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
+--- !u!114 &623534275400461781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5938012053928262838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f5f051fac302374bada375b07b7e952, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7521228769676029762
 GameObject:
   m_ObjectHideFlags: 0
@@ -275,6 +288,7 @@ MonoBehaviour:
   bullet_obj: {fileID: 5249904446823242199, guid: 4710480083e088540b0024ee35d49430, type: 3}
   shootpoint: {fileID: 8958931085329324019}
   audioSource: {fileID: 0}
+  weaponType: 0
 --- !u!114 &845412814805782930
 MonoBehaviour:
   m_ObjectHideFlags: 0

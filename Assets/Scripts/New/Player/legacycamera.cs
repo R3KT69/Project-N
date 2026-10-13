@@ -12,7 +12,7 @@ public class PlayerCamera : MonoBehaviour
     public Vector3 baseOffset = new Vector3(0f, 1.5f, 0f); // Camera position 
     public Vector3 orbitOffset = new Vector3(0f, 0f, 0f);  // Free-look offset
     public Vector3 aimingOffset = new Vector3(0.5f, 0f, 1f);   // Aiming offset
-    private bool isOffsetFlipped = false;
+    //private bool isOffsetFlipped = false;
 
     [Header("Transition Settings")]
     public float bodyRotationSpeed = 10f;
@@ -25,7 +25,7 @@ public class PlayerCamera : MonoBehaviour
     private Transform playerTransform;
     
     private Vector3 currentShoulderOffset = Vector3.zero;
-    private float aimBlend = 0f; 
+    //private float aimBlend = 0f; 
 
     void Start()
     {

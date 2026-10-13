@@ -63,7 +63,7 @@ public class Weapon : NetworkBehaviour
     }
 
     // SHOTGUN
-    public void ShotgunFire(int pellets, float spread)
+    public void ShotgunFire(int pellets, float spread, float force = 25f)
     {
         float halfAngle = spread * 0.5f;
         float cosMaxAngle = Mathf.Cos(halfAngle * Mathf.Deg2Rad);
@@ -92,7 +92,7 @@ public class Weapon : NetworkBehaviour
 
             if (rb != null)
             {
-                rb.AddForce(direction * 25f, ForceMode.Impulse);
+                rb.AddForce(direction * force, ForceMode.Impulse);
             }
         }
     }
@@ -113,7 +113,13 @@ public class Weapon : NetworkBehaviour
 
         while (true)
         {
+            // FIRING LOOP (AUTOMATIC)
+
             FireProjectile();
+
+            
+
+
             yield return new WaitForSeconds(interval);
         }
     }
