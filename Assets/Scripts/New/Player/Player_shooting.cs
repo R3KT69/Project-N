@@ -49,7 +49,7 @@ public class Player_shooting : NetworkBehaviour
             }
             else if (selected_weapon.weaponType == WeaponClass.Shotgun)
             {
-                selected_weapon.ShotgunFire(5, 5);
+                selected_weapon.ShotgunFire(6, 15);
             }
             
         }

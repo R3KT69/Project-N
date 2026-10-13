@@ -65,14 +65,22 @@ public class Weapon : NetworkBehaviour
     // SHOTGUN
     public void ShotgunFire(int pellets, float spread)
     {
+        float halfAngle = spread * 0.5f;
+        float cosMaxAngle = Mathf.Cos(halfAngle * Mathf.Deg2Rad);
+
         for (int i = 0; i < pellets; i++)
         {
-            Vector3 direction = shootpoint.forward;
+            float cosTheta = Random.Range(cosMaxAngle, 1f);
+            float sinTheta = Mathf.Sqrt(1f - cosTheta * cosTheta);
+            float phi = Random.Range(0f, 2f * Mathf.PI);
 
-            direction += shootpoint.right * Random.Range(-spread, spread);
-            direction += shootpoint.up * Random.Range(-spread, spread);
+            Vector3 localDirection = new Vector3(
+                sinTheta * Mathf.Cos(phi),
+                sinTheta * Mathf.Sin(phi),
+                cosTheta
+            );
 
-            direction.Normalize();
+            Vector3 direction = shootpoint.TransformDirection(localDirection);
 
             GameObject bullet = Instantiate(
                 bullet_obj,
