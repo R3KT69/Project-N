@@ -12,7 +12,8 @@ public class Player_action : NetworkBehaviour
 {
     public Player_movement player_Movement;
     public Player_inventory player_Inventory;
-    public Player_camera playerCamera;
+    public Player_audio player_Audio;
+    public Player_camera player_Camera;
     public Animator animator;
     public WeaponType weaponType;
     public Rig_shifting rig_Shifting;
@@ -31,6 +32,23 @@ public class Player_action : NetworkBehaviour
         {
             rig_Shifting = gameObject.GetComponent<Rig_shifting>();
         }
+        if (player_Audio == null)
+        {
+            player_Audio = gameObject.GetComponent<Player_audio>();
+        }
+        if (player_Inventory == null)
+        {
+            player_Inventory = gameObject.GetComponent<Player_inventory>();
+        }
+        if (player_Movement == null)
+        {
+            player_Movement = gameObject.GetComponent<Player_movement>();
+        }
+        if (player_Camera == null)
+        {
+            player_Camera = gameObject.GetComponent<Player_camera>();
+        }
+   
        
     }
 
@@ -73,11 +91,11 @@ public class Player_action : NetworkBehaviour
 
 
         
-        Debug.DrawRay(playerCamera.p_camera.transform.position, playerCamera.p_camera.transform.forward * 5f, selected_color);
+        Debug.DrawRay(player_Camera.p_camera.transform.position, player_Camera.p_camera.transform.forward * 5f, selected_color);
         selected_color = Color.red;
         lookAt = "";
         isLooking = false;
-        if (Physics.Raycast(playerCamera.p_camera.transform.position, playerCamera.p_camera.transform.forward , out RaycastHit hit, 5f))
+        if (Physics.Raycast(player_Camera.p_camera.transform.position, player_Camera.p_camera.transform.forward , out RaycastHit hit, 5f))
         {
             if (hit.collider.CompareTag("Weapon") && !hit.collider.gameObject.GetComponent<Item>().isEquipped)
             {
@@ -130,6 +148,7 @@ public class Player_action : NetworkBehaviour
             //selected_item_old.GetComponent<Item>().isEquipped = false;
             //AdjustAmmoAndEquipState(ammo, false, dropped_item);
 
+            player_Audio.Drop_Item_Sfx();
             
         }
     }
@@ -139,24 +158,29 @@ public class Player_action : NetworkBehaviour
 
     public void pickup_item_exp()
     {
-        if (isHolding || isAiming || !isLooking) return;
+        if (isHolding || isAiming || !isLooking || player_Inventory.isHotbarFull()) return;
 
         Debug.Log("Trying to pickup");
 
-        
-
         if (Input.GetKeyDown(KeyCode.F))
         {
+            Item item = lookAtObj.GetComponent<Item>();
+            
+            if (item.itemCategory == ItemCategory.OneHanded && !player_Inventory.isSecondaryEmpty()) return;
+            if (item.itemCategory == ItemCategory.TwoHanded && !player_Inventory.isPrimaryEmpty()) return;
+
             int free_index = player_Inventory.GetEmptyHandIndex();
             string flag = "none";
 
-            if (lookAtObj.GetComponent<Item>().itemCategory == ItemCategory.OneHanded)
+            if (item.itemCategory == ItemCategory.OneHanded) 
             {
                 flag = "Pistol";
-            } else if (lookAtObj.GetComponent<Item>().itemCategory == ItemCategory.TwoHanded)
+            } else if (item.itemCategory == ItemCategory.TwoHanded)
             {
                 flag = "Rifle";
             }
+
+            
 
             AttachWeapon(lookAtObj, flag);
 
@@ -166,6 +190,7 @@ public class Player_action : NetworkBehaviour
             lookAtObj.GetComponent<Item>().isEquipped = true;
 
             Debug.Log($"Success. Given item {lookAtObj.name} to playerid: {localPlayer}");
+            player_Audio.Pickup_Item_Sfx();
         }
     }
 

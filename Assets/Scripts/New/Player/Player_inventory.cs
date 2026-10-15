@@ -11,6 +11,8 @@ public class Player_inventory : NetworkBehaviour
     public Player_action player_Action;
     public GameObject empty_hand;
     public Transform throw_item;
+
+    
     
 
     void OnGUI()
@@ -23,7 +25,54 @@ public class Player_inventory : NetworkBehaviour
         {
             GUI.Label(new Rect(20, 40 + i*20 + 275, 300, 30), $"hotbar[{i}]: {Hotbar[i].item_name}");
         }
+
         
+        
+    }
+
+    public bool isHotbarFull()
+    {
+        int inv_count = 0;
+
+        for (int i = 0; i < Hotbar.Count; i++)
+        {
+            if (Hotbar[i] != empty_hand.GetComponent<Item>())
+            {
+                inv_count += 1;
+            }
+        }
+
+        Debug.Log($"current inv size: {inv_count}");
+
+        if (inv_count >= 6) return true;
+
+        else return false;
+    }
+
+    public bool isPrimaryEmpty()
+    {
+        for (int i = 0; i < Hotbar.Count; i++)
+        {
+            if (Hotbar[i].gameObject.GetComponent<Item>().itemCategory == ItemCategory.TwoHanded)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public bool isSecondaryEmpty()
+    {
+        for (int i = 0; i < Hotbar.Count; i++)
+        {
+            if (Hotbar[i].gameObject.GetComponent<Item>().itemCategory == ItemCategory.OneHanded)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     void Awake()
@@ -42,7 +91,7 @@ public class Player_inventory : NetworkBehaviour
 
         if (!isOwner) return;
 
-        
+        Debug.Log(isHotbarFull());
 
         if (!player_Action.isHolding)
         {
