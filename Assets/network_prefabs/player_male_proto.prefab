@@ -888,7 +888,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -5017,7 +5017,7 @@ MonoBehaviour:
   player_Movement: {fileID: 9039855624424223584}
   player_Inventory: {fileID: 4674021931755222137}
   player_Audio: {fileID: 0}
-  playerCamera: {fileID: 5844346778534818715}
+  player_Camera: {fileID: 0}
   animator: {fileID: 3653580797207517873}
   weaponType: 0
   rig_Shifting: {fileID: 2722821639623361278}

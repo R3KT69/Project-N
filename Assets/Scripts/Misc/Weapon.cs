@@ -25,14 +25,31 @@ public class Weapon : NetworkBehaviour
     public AudioSource audioSource;
     public WeaponClass weaponType;
 
-    
 
+    public Light pointLight;
+    public float duration = 0.05f;
+    public float intensity = 5f;
+
+    void Start()
+    {
+        pointLight = gameObject.GetComponentInChildren<Light>();
+    }
+
+
+    
+ 
     public void PlayVFX()
     {
         if (muzzleFlash != null)
         {
             muzzleFlash.Play();
         }
+
+        if (pointLight != null)
+        {
+            toggle_light();
+        }
+
     }
 
     public void PlaySFX()
@@ -111,44 +128,66 @@ public class Weapon : NetworkBehaviour
     }
 
     // AUTOMATIC
-// AUTOMATIC
-private Coroutine automaticCoroutine;
+    private Coroutine automaticCoroutine;
 
-public void AutomaticFire(float speed = 5)
-{
-    if (automaticCoroutine != null) return;
-
-    automaticCoroutine = StartCoroutine(AutomaticFireRoutine(speed));
-}
-
-private IEnumerator AutomaticFireRoutine(float speed)
-{
-    float interval = 1f / Mathf.Max(speed, 0.01f);
-
-    while (true)
+    public void AutomaticFire(float speed = 5)
     {
-        Debug.Log($"AUTO FIRE: {Time.time}");
-        FireProjectile(100);
-        PlaySFX_VFX_Auto();
+        if (automaticCoroutine != null) return;
 
-        yield return new WaitForSeconds(interval);
+        automaticCoroutine = StartCoroutine(AutomaticFireRoutine(speed));
     }
-}
 
-public void StopAutomaticFire()
-{
-    if (automaticCoroutine == null) return;
+    private IEnumerator AutomaticFireRoutine(float speed)
+    {
+        float interval = 1f / Mathf.Max(speed, 0.01f);
 
-    StopCoroutine(automaticCoroutine);
-    automaticCoroutine = null;
-}
+        while (true)
+        {
+            Debug.Log($"AUTO FIRE: {Time.time}");
+            FireProjectile(100);
+            PlaySFX_VFX_Auto();
 
-[ObserversRpc]
-public void PlaySFX_VFX_Auto()
-{
-    PlaySFX();
-    PlayVFX();
-}
+            yield return new WaitForSeconds(interval);
+        }
+    }
+
+    public void StopAutomaticFire()
+    {
+        if (automaticCoroutine == null) return;
+
+        StopCoroutine(automaticCoroutine);
+        automaticCoroutine = null;
+    }
+
+    private Coroutine lightCoroutine;
+
+    public void toggle_light()
+    {
+        if (lightCoroutine != null)
+        {
+            StopCoroutine(lightCoroutine);
+        }
+
+        lightCoroutine = StartCoroutine(Flash());
+    }
+
+    private IEnumerator Flash()
+    {
+        pointLight.enabled = true;
+        pointLight.intensity = intensity;
+
+        yield return new WaitForSeconds(duration);
+
+        pointLight.enabled = false;
+        lightCoroutine = null;
+    }
+
+    [ObserversRpc]
+    public void PlaySFX_VFX_Auto()
+    {
+        PlaySFX();
+        PlayVFX();
+    }
 
     [ObserversRpc]
     public void TransferData(int old_Ammo)
