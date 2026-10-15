@@ -23,24 +23,31 @@ public class Player_shooting : NetworkBehaviour
             
             if (selected_weapon.weaponType == WeaponClass.Automatic)
             {
-                if (Input.GetMouseButton(0))
+                if (Input.GetMouseButtonDown(0))
                 {
                     InitiateShootingAuto(selected_weapon);
-                } else
+                }
+
+                if (Input.GetMouseButtonUp(0))
                 {
                     selected_weapon.StopAutomaticFire();
                 }
 
                 return;
+            }
+
+            if (selected_weapon.weaponType != WeaponClass.Automatic)
+            {
+                if (Input.GetMouseButtonDown(0))
+                {
+                    InitiateShooting(selected_weapon);
+                    
+                    //Instantiate()
+                }
                 //Instantiate()
             }
 
-            if (Input.GetMouseButtonDown(0))
-            {
-                InitiateShooting(selected_weapon);
-                
-                //Instantiate()
-            }
+            
         }
     }
 
@@ -50,8 +57,8 @@ public class Player_shooting : NetworkBehaviour
         Debug.Log("Shooting.");
         Debug.Log($"got weapon: {selected_weapon.name}");
 
-        selected_weapon.PlaySFX();
-        selected_weapon.PlayVFX();
+        //selected_weapon.PlaySFX();
+        //selected_weapon.PlayVFX();
 
         if (isOwner)
         {
@@ -75,14 +82,12 @@ public class Player_shooting : NetworkBehaviour
         Debug.Log("Shooting.");
         Debug.Log($"got weapon: {selected_weapon.name}");
 
-        selected_weapon.PlaySFX();
-        selected_weapon.PlayVFX();
+        //selected_weapon.PlaySFX();
+        //selected_weapon.PlayVFX();
 
         if (isOwner)
         {
             selected_weapon.AutomaticFire(5);
-            
-            
         }
         
     }

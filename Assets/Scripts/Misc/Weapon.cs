@@ -11,12 +11,21 @@ public enum WeaponClass
 
 public class Weapon : NetworkBehaviour
 {
+    [Header("Weapon Attributes")]
     public int Ammo;
+    public float firerate;
+    public float pellet_count;
+
+
+
+    [Header("Weapon Requirements")]
     public ParticleSystem muzzleFlash;
     public GameObject bullet_obj;
     public Transform shootpoint;
     public AudioSource audioSource;
     public WeaponClass weaponType;
+
+    
 
     public void PlayVFX()
     {
@@ -30,7 +39,7 @@ public class Weapon : NetworkBehaviour
     {
         if (audioSource != null)
         {
-            audioSource.Play();
+            audioSource.PlayOneShot(audioSource.clip);
         }
     }
 
@@ -54,12 +63,14 @@ public class Weapon : NetworkBehaviour
     public void RifleFire()
     {
         FireProjectile();
+        PlaySFX_VFX_Auto();
     }
 
     // PISTOL
     public void PistolFire()
     {
         FireProjectile();
+        PlaySFX_VFX_Auto();
     }
 
     // SHOTGUN
@@ -95,43 +106,49 @@ public class Weapon : NetworkBehaviour
                 rb.AddForce(direction * force, ForceMode.Impulse);
             }
         }
+
+        PlaySFX_VFX_Auto();
     }
 
     // AUTOMATIC
-    public void AutomaticFire(float speed)
+// AUTOMATIC
+private Coroutine automaticCoroutine;
+
+public void AutomaticFire(float speed = 5)
+{
+    if (automaticCoroutine != null) return;
+
+    automaticCoroutine = StartCoroutine(AutomaticFireRoutine(speed));
+}
+
+private IEnumerator AutomaticFireRoutine(float speed)
+{
+    float interval = 1f / Mathf.Max(speed, 0.01f);
+
+    while (true)
     {
-        if (automaticCoroutine != null) return;
+        Debug.Log($"AUTO FIRE: {Time.time}");
+        FireProjectile();
+        PlaySFX_VFX_Auto();
 
-        automaticCoroutine = StartCoroutine(AutomaticFireRoutine(speed));
+        yield return new WaitForSeconds(interval);
     }
+}
 
-    private Coroutine automaticCoroutine;
+public void StopAutomaticFire()
+{
+    if (automaticCoroutine == null) return;
 
-    private IEnumerator AutomaticFireRoutine(float speed)
-    {
-        float interval = 1f / Mathf.Max(speed, 0.01f);
+    StopCoroutine(automaticCoroutine);
+    automaticCoroutine = null;
+}
 
-        while (true)
-        {
-            // FIRING LOOP (AUTOMATIC)
-
-            FireProjectile();
-
-            
-
-
-            yield return new WaitForSeconds(interval);
-        }
-    }
-
-    public void StopAutomaticFire()
-    {
-        if (automaticCoroutine != null)
-        {
-            StopCoroutine(automaticCoroutine);
-            automaticCoroutine = null;
-        }
-    }
+[ObserversRpc]
+public void PlaySFX_VFX_Auto()
+{
+    PlaySFX();
+    PlayVFX();
+}
 
     [ObserversRpc]
     public void TransferData(int old_Ammo)
