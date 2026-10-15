@@ -43,7 +43,7 @@ public class Weapon : NetworkBehaviour
         }
     }
 
-    public void FireProjectile()
+    public void FireProjectile(float force = 25f)
     {
         GameObject bullet = Instantiate(
             bullet_obj,
@@ -55,21 +55,21 @@ public class Weapon : NetworkBehaviour
 
         if (rb != null)
         {
-            rb.AddForce(shootpoint.forward * 25f, ForceMode.Impulse);
+            rb.AddForce(shootpoint.forward * force, ForceMode.Impulse);
         }
     }
 
     // RIFLE
     public void RifleFire()
     {
-        FireProjectile();
+        FireProjectile(150);
         PlaySFX_VFX_Auto();
     }
 
     // PISTOL
     public void PistolFire()
     {
-        FireProjectile();
+        FireProjectile(50);
         PlaySFX_VFX_Auto();
     }
 
@@ -128,7 +128,7 @@ private IEnumerator AutomaticFireRoutine(float speed)
     while (true)
     {
         Debug.Log($"AUTO FIRE: {Time.time}");
-        FireProjectile();
+        FireProjectile(100);
         PlaySFX_VFX_Auto();
 
         yield return new WaitForSeconds(interval);

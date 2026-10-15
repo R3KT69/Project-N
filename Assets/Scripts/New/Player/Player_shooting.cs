@@ -87,7 +87,7 @@ public class Player_shooting : NetworkBehaviour
 
         if (isOwner)
         {
-            selected_weapon.AutomaticFire(5);
+            selected_weapon.AutomaticFire(selected_weapon.firerate);
         }
         
     }

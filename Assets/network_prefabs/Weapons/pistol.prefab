@@ -284,11 +284,13 @@ MonoBehaviour:
   _invertedPathToNearestParent: 
   _directChildren: []
   Ammo: 5
+  firerate: 0
+  pellet_count: 0
   muzzleFlash: {fileID: 2595495904836196222}
   bullet_obj: {fileID: 5249904446823242199, guid: 4710480083e088540b0024ee35d49430, type: 3}
   shootpoint: {fileID: 8958931085329324019}
   audioSource: {fileID: 0}
-  weaponType: 0
+  weaponType: 2
 --- !u!114 &845412814805782930
 MonoBehaviour:
   m_ObjectHideFlags: 0
