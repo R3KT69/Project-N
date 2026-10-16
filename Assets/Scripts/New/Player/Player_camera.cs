@@ -74,11 +74,7 @@ public class Player_camera : NetworkBehaviour
     }
 
 
-    public void Recoil(
-    float amount,
-    float horizontal = 1f,
-    float randomness = 0.5f
-    )
+    public void Recoil(float amount, float horizontal = 1f, float randomness = 0.5f, float swayRange = 10f)
     {
         // Generate recoil value
         float verticalRecoil = amount + Random.Range(0f, randomness);
@@ -93,7 +89,7 @@ public class Player_camera : NetworkBehaviour
 
         data.offset = new Vector3(
             data.offset.x - verticalRecoil,
-            data.offset.y + Random.Range(-10, 10),
+            data.offset.y + Random.Range(-swayRange, swayRange),
             data.offset.z
         );
 

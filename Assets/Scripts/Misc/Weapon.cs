@@ -38,14 +38,14 @@ public class Weapon : NetworkBehaviour
     }
 
 
-    public void PlayRecoil(float amount)
+    public void PlayRecoil(float amount, float horizontal = 1f, float randomness = 0.5f, float swayRange = 10f)
     {
         if (player_Camera == null)
         {
             player_Camera = transform.root.GetComponent<Player_camera>();
         }
 
-        player_Camera.Recoil(amount);
+        player_Camera.Recoil(amount, horizontal, randomness, swayRange);
     }
  
     public void PlayVFX()
@@ -158,7 +158,7 @@ public class Weapon : NetworkBehaviour
 
         while (true)
         {
-            Debug.Log($"AUTO FIRE: {Time.time}");
+            //Debug.Log($"AUTO FIRE: {Time.time}");
             FireProjectile(100);
             PlaySFX_VFX_Auto();
             PlayRecoil(recoil_force);
