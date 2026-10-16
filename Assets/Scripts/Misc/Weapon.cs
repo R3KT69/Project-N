@@ -35,6 +35,12 @@ public class Weapon : NetworkBehaviour
     {
         pointLight = gameObject.GetComponentInChildren<Light>();
         player_Camera = transform.root.GetComponent<Player_camera>();
+
+        if (audioSource == null)
+        {
+            audioSource = gameObject.GetComponentInChildren<AudioSource>();
+        }
+        
     }
 
 
