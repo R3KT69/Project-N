@@ -427,11 +427,16 @@ MonoBehaviour:
   Ammo: 5
   firerate: 10
   pellet_count: 0
+  recoil_force: 2
   muzzleFlash: {fileID: 7256395510803516730}
   bullet_obj: {fileID: 5249904446823242199, guid: 4710480083e088540b0024ee35d49430, type: 3}
   shootpoint: {fileID: 5954580781529135960}
   audioSource: {fileID: 5807786162331351808}
   weaponType: 0
+  player_Camera: {fileID: 0}
+  pointLight: {fileID: 0}
+  duration: 0.05
+  intensity: 5
 --- !u!114 &6740492768777886967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -539,7 +544,7 @@ MonoBehaviour:
   _characterControllerPatch: 0
   _ownerAuth: 1
   _interpolationTiming: 0
-  _adaptiveSynchronization: 2
+  _adaptiveSynchronization: 0
 --- !u!1001 &766509860108077942
 PrefabInstance:
   m_ObjectHideFlags: 0

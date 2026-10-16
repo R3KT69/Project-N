@@ -1,11 +1,12 @@
 using PurrNet;
-using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 public class Player_camera : NetworkBehaviour
 {
     public Player_movement player_Movement;
     public Player_action player_action;
+    public MultiRotationConstraint spine_02;
     public GameObject playerCamRotation;
     public Camera p_camera;
     public Transform target;
@@ -24,7 +25,7 @@ public class Player_camera : NetworkBehaviour
 
     [Header("Aim Camera")]
     public Vector3 aim_offset = new Vector3(0.6f, 1.6f, -0.2f);
-    
+    public float recoilRecoverySpeed = 2f;
 
     
 
@@ -69,6 +70,37 @@ public class Player_camera : NetworkBehaviour
     void Update()
     {
         // Debug.Log($"p_camera transform:{p_camera.transform.position}\np_camera_default transform:{p_camera_default}");
+        
+    }
+
+
+    public void Recoil(
+    float amount,
+    float horizontal = 1f,
+    float randomness = 0.5f
+    )
+    {
+        // Generate recoil value
+        float verticalRecoil = amount + Random.Range(0f, randomness);
+        float horizontalRecoil = Random.Range(-horizontal, horizontal);
+
+        // Camera recoil
+        pitch -= verticalRecoil;
+        yaw += horizontalRecoil;
+
+        // arm recoil
+        var data = spine_02.data;
+
+        data.offset = new Vector3(
+            data.offset.x - verticalRecoil,
+            data.offset.y + Random.Range(-10, 10),
+            data.offset.z
+        );
+
+        spine_02.data = data;
+
+        // Clamp vertical rotation
+        pitch = Mathf.Clamp(pitch, minimum_pitch, maximum_pitch);
     }
 
     void LateUpdate()
@@ -88,6 +120,20 @@ public class Player_camera : NetworkBehaviour
                 return;
             }
         }
+
+        // =========================
+        // Reset arm recoil
+        // =========================
+
+        var data = spine_02.data;
+
+        data.offset = Vector3.Lerp(
+            data.offset,
+            Vector3.zero,
+            Time.deltaTime * recoilRecoverySpeed
+        );
+
+        spine_02.data = data;
 
 
         // =========================

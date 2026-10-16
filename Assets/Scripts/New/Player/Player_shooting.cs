@@ -4,6 +4,7 @@ using UnityEngine;
 public class Player_shooting : NetworkBehaviour
 {
     public Player_action player_Action;
+    public Player_camera player_Camera;
     public Player_inventory player_Inventory;
 
 
@@ -11,6 +12,7 @@ public class Player_shooting : NetworkBehaviour
     {
         player_Action = gameObject.GetComponent<Player_action>();
         player_Inventory = gameObject.GetComponent<Player_inventory>();
+        player_Camera = gameObject.GetComponent<Player_camera>();
     }
     // Update is called once per frame
     void Update()

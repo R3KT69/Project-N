@@ -810,75 +810,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1001 &219938144
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 6327276572174770745, guid: d63f6e8c74f93d54c867537aee3042e7, type: 3}
-      propertyPath: m_Name
-      value: MuzzleFlash
-      objectReference: {fileID: 0}
-    - target: {fileID: 8517087022897108242, guid: d63f6e8c74f93d54c867537aee3042e7, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8517087022897108242, guid: d63f6e8c74f93d54c867537aee3042e7, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8517087022897108242, guid: d63f6e8c74f93d54c867537aee3042e7, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8517087022897108242, guid: d63f6e8c74f93d54c867537aee3042e7, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.8266883
-      objectReference: {fileID: 0}
-    - target: {fileID: 8517087022897108242, guid: d63f6e8c74f93d54c867537aee3042e7, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.456
-      objectReference: {fileID: 0}
-    - target: {fileID: 8517087022897108242, guid: d63f6e8c74f93d54c867537aee3042e7, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 2.4226556
-      objectReference: {fileID: 0}
-    - target: {fileID: 8517087022897108242, guid: d63f6e8c74f93d54c867537aee3042e7, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8517087022897108242, guid: d63f6e8c74f93d54c867537aee3042e7, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8517087022897108242, guid: d63f6e8c74f93d54c867537aee3042e7, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8517087022897108242, guid: d63f6e8c74f93d54c867537aee3042e7, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8517087022897108242, guid: d63f6e8c74f93d54c867537aee3042e7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8517087022897108242, guid: d63f6e8c74f93d54c867537aee3042e7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -180
-      objectReference: {fileID: 0}
-    - target: {fileID: 8517087022897108242, guid: d63f6e8c74f93d54c867537aee3042e7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: d63f6e8c74f93d54c867537aee3042e7, type: 3}
 --- !u!4 &220922713 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5320197272316617864, guid: 9c73b06e210e71d4789ee84d760e65bd, type: 3}
@@ -4667,7 +4598,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _automaticCloudSetups:
     _adaptToEdgegap: 1
-  _serverPort: 5554
+  _serverPort: 5555
   _maxConnections: 100
   _address: 127.0.0.1
   _timeoutInSeconds: 5
@@ -4703,6 +4634,7 @@ MonoBehaviour:
   _visibilityRules: {fileID: 11400000, guid: 8f014a5bd8dc68646a2a3c0b18c5bbd8, type: 2}
   _authenticator: {fileID: 0}
   _tickRate: 60
+  _maxTicksPerFrame: 5
   _mtuExceededBehaviour: 2
   _patchLingeringProcessBug: 0
 --- !u!114 &1515407295
@@ -4717,7 +4649,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ced7bf28cdbee104e8cdc34ab761b039, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerPrefab: {fileID: 8698589144985593415, guid: 2437c5553e95ea144bd1d1a2b070b77d, type: 3}
+  _playerPrefab: {fileID: 8698589144985593415, guid: c5b733e02dd4c954eadcb050dd7f9c7a, type: 3}
   _ignoreNetworkRules: 0
   spawnPoints:
   - {fileID: 1057257804}
@@ -7842,6 +7774,5 @@ SceneRoots:
   - {fileID: 1975675070}
   - {fileID: 1440062118}
   - {fileID: 1793313172}
-  - {fileID: 219938144}
   - {fileID: 333034246}
   - {fileID: 2144225436}

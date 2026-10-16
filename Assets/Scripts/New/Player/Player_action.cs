@@ -141,6 +141,8 @@ public class Player_action : NetworkBehaviour
             rb.interpolation = RigidbodyInterpolation.Interpolate;
             rb.automaticCenterOfMass = false;
             rb.automaticInertiaTensor = false;
+
+            
             
             //rb.centerOfMass = Vector3.zero;
             //rb.AddForce(transform.forward * 2f, ForceMode.Impulse); // drop motion
@@ -165,7 +167,7 @@ public class Player_action : NetworkBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             Item item = lookAtObj.GetComponent<Item>();
-            
+
             if (item.itemCategory == ItemCategory.OneHanded && !player_Inventory.isSecondaryEmpty()) return;
             if (item.itemCategory == ItemCategory.TwoHanded && !player_Inventory.isPrimaryEmpty()) return;
 

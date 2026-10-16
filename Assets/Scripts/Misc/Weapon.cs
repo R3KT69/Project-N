@@ -15,7 +15,7 @@ public class Weapon : NetworkBehaviour
     public int Ammo;
     public float firerate;
     public float pellet_count;
-
+    public float recoil_force;
 
 
     [Header("Weapon Requirements")]
@@ -24,6 +24,7 @@ public class Weapon : NetworkBehaviour
     public Transform shootpoint;
     public AudioSource audioSource;
     public WeaponClass weaponType;
+    public Player_camera player_Camera;
 
 
     public Light pointLight;
@@ -33,10 +34,19 @@ public class Weapon : NetworkBehaviour
     void Start()
     {
         pointLight = gameObject.GetComponentInChildren<Light>();
+        player_Camera = transform.root.GetComponent<Player_camera>();
     }
 
 
-    
+    public void PlayRecoil(float amount)
+    {
+        if (player_Camera == null)
+        {
+            player_Camera = transform.root.GetComponent<Player_camera>();
+        }
+
+        player_Camera.Recoil(amount);
+    }
  
     public void PlayVFX()
     {
@@ -74,6 +84,8 @@ public class Weapon : NetworkBehaviour
         {
             rb.AddForce(shootpoint.forward * force, ForceMode.Impulse);
         }
+
+        
     }
 
     // RIFLE
@@ -81,6 +93,7 @@ public class Weapon : NetworkBehaviour
     {
         FireProjectile(150);
         PlaySFX_VFX_Auto();
+        PlayRecoil(recoil_force);
     }
 
     // PISTOL
@@ -88,6 +101,7 @@ public class Weapon : NetworkBehaviour
     {
         FireProjectile(50);
         PlaySFX_VFX_Auto();
+        PlayRecoil(recoil_force);
     }
 
     // SHOTGUN
@@ -125,6 +139,7 @@ public class Weapon : NetworkBehaviour
         }
 
         PlaySFX_VFX_Auto();
+        PlayRecoil(recoil_force);
     }
 
     // AUTOMATIC
@@ -146,6 +161,7 @@ public class Weapon : NetworkBehaviour
             Debug.Log($"AUTO FIRE: {Time.time}");
             FireProjectile(100);
             PlaySFX_VFX_Auto();
+            PlayRecoil(recoil_force);
 
             yield return new WaitForSeconds(interval);
         }
