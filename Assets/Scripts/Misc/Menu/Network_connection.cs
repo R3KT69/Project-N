@@ -30,7 +30,7 @@ public class Network_connection : MonoBehaviour
 
         start_host = true;
         Debug.Log($"Hosting, ip:  {server_ip}");
-        SceneManager.LoadScene("Test");
+        SceneManager.LoadScene("Test_lite");
     }
 
     public void Exec_conn()
@@ -40,6 +40,6 @@ public class Network_connection : MonoBehaviour
 
         start_client = true;
         Debug.Log($"Connecting to ip:  {server_ip}");
-        SceneManager.LoadScene("Test");
+        SceneManager.LoadScene("Test_lite");
     }
 }
