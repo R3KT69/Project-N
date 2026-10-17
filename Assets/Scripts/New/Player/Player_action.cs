@@ -142,7 +142,8 @@ public class Player_action : NetworkBehaviour
             rb.automaticCenterOfMass = false;
             rb.automaticInertiaTensor = false;
 
-            
+
+            ToggleNetworkTransform(selected_item_old, true);
             
             //rb.centerOfMass = Vector3.zero;
             //rb.AddForce(transform.forward * 2f, ForceMode.Impulse); // drop motion
@@ -191,9 +192,17 @@ public class Player_action : NetworkBehaviour
             lookAtObj.GetComponent<NetworkIdentity>().GiveOwnership(localPlayer);
             lookAtObj.GetComponent<Item>().isEquipped = true;
 
+            ToggleNetworkTransform(lookAtObj, false);
+
             Debug.Log($"Success. Given item {lookAtObj.name} to playerid: {localPlayer}");
             player_Audio.Pickup_Item_Sfx();
         }
+    }
+
+    [ObserversRpc]
+    public void ToggleNetworkTransform(GameObject selected_object, bool action)
+    {
+        selected_object.GetComponent<NetworkTransform>().enabled = action;
     }
 
     [ObserversRpc]
@@ -249,7 +258,114 @@ public class Player_action : NetworkBehaviour
         player_Inventory.Hotbar[player_Inventory.selectedHotbarIndex] = player_Inventory.selectedItem;
     }
 
-    // drop_item and pickup_item below only works for offline instances. Dont use them
+
+    public void handle_unequip()
+    {
+        if (isHolding)
+        {
+            if (Input.GetMouseButtonDown(1))
+            {
+                isAiming = !isAiming;
+                animator.SetBool("isAiming", isAiming);
+
+                if (isAiming)
+                {
+                    if (weaponType == WeaponType.Rifle)
+                    {
+                        RpcTriggerAim_RifleAim();
+                        rig_Shifting.EnableRig();
+                    } else if (weaponType == WeaponType.Pistol)
+                    {
+                        RpcTriggerAim_PistolAim();
+                        rig_Shifting.EnableRig();
+                    }
+                    
+                }
+            }
+        }
+    }
+
+    public void handle_equip_twohanded()
+    {
+        if (player_Inventory.selectedItem.itemCategory == ItemCategory.None) return;
+        
+        if (Input.GetKeyDown(KeyCode.R) && player_Inventory.selectedItem.itemCategory == ItemCategory.TwoHanded)
+        {
+            if (isAiming) return;
+
+            
+            RpcInvTransferTransform(rifle_slot.transform);
+            weaponType = WeaponType.Rifle;
+            isHolding = !isHolding;
+            animator.SetBool("isHolding", isHolding);
+
+            if (isHolding)
+            {
+                RpcTriggerAim_Rifle();
+            } else
+            {
+                RpcInvTransferTransform(rifle_holster.transform);
+            }
+        }
+    }
+
+    public void handle_equip_onehanded()
+    {
+        if (player_Inventory.selectedItem.itemCategory == ItemCategory.None) return;
+        
+        if (Input.GetKeyDown(KeyCode.R) && player_Inventory.selectedItem.itemCategory == ItemCategory.OneHanded)
+        {
+            if (isAiming) return;
+
+            RpcInvTransferTransform(pistol_slot.transform);
+            weaponType = WeaponType.Pistol;
+            isHolding = !isHolding;
+            animator.SetBool("isHolding", isHolding);
+
+            if (isHolding)
+            {
+                RpcTriggerAim_Pistol();
+            } else
+            {
+                RpcInvTransferTransform(pistol_holster.transform);
+            }
+        }
+    }
+
+    [ObserversRpc]
+    private void RpcInvTransferTransform(Transform transform)
+    {
+        if (player_Inventory.selectedItem == null)
+            return;
+
+        player_Inventory.selectedItem.transform.SetParent(transform, false);
+    }
+
+    [ObserversRpc]
+    private void RpcTriggerAim_Rifle()
+    {
+        animator.SetTrigger("Rifle");
+    }
+
+    [ObserversRpc]
+    private void RpcTriggerAim_Pistol()
+    {
+        animator.SetTrigger("Pistol");
+    }
+
+    [ObserversRpc]
+    private void RpcTriggerAim_RifleAim()
+    {
+        animator.SetTrigger("RifleAim");
+    }
+
+    [ObserversRpc]
+    private void RpcTriggerAim_PistolAim()
+    {
+        animator.SetTrigger("PistolAim");
+    }
+
+        // drop_item and pickup_item below only works for offline instances. Dont use them
 
     /*
     public void drop_item()
@@ -380,113 +496,6 @@ public class Player_action : NetworkBehaviour
     */
 
     // drop_item and pickup_item above only works for offline instances. Dont use them
-
-    public void handle_unequip()
-    {
-        if (isHolding)
-        {
-            if (Input.GetMouseButtonDown(1))
-            {
-                isAiming = !isAiming;
-                animator.SetBool("isAiming", isAiming);
-
-                if (isAiming)
-                {
-                    if (weaponType == WeaponType.Rifle)
-                    {
-                        RpcTriggerAim_RifleAim();
-                        rig_Shifting.EnableRig();
-                    } else if (weaponType == WeaponType.Pistol)
-                    {
-                        RpcTriggerAim_PistolAim();
-                        rig_Shifting.EnableRig();
-                    }
-                    
-                }
-            }
-        }
-    }
-
-    public void handle_equip_twohanded()
-    {
-        if (player_Inventory.selectedItem.itemCategory == ItemCategory.None) return;
-        
-        if (Input.GetKeyDown(KeyCode.R) && player_Inventory.selectedItem.itemCategory == ItemCategory.TwoHanded)
-        {
-            if (isAiming) return;
-
-            
-            RpcInvTransferTransform(rifle_slot.transform);
-            weaponType = WeaponType.Rifle;
-            isHolding = !isHolding;
-            animator.SetBool("isHolding", isHolding);
-
-            if (isHolding)
-            {
-                RpcTriggerAim_Rifle();
-            } else
-            {
-                RpcInvTransferTransform(rifle_holster.transform);
-            }
-        }
-    }
-
-    public void handle_equip_onehanded()
-    {
-        if (player_Inventory.selectedItem.itemCategory == ItemCategory.None) return;
-        
-        if (Input.GetKeyDown(KeyCode.R) && player_Inventory.selectedItem.itemCategory == ItemCategory.OneHanded)
-        {
-            if (isAiming) return;
-
-            RpcInvTransferTransform(pistol_slot.transform);
-            weaponType = WeaponType.Pistol;
-            isHolding = !isHolding;
-            animator.SetBool("isHolding", isHolding);
-
-            if (isHolding)
-            {
-                RpcTriggerAim_Pistol();
-            } else
-            {
-                RpcInvTransferTransform(pistol_holster.transform);
-            }
-        }
-    }
-
-    [ObserversRpc]
-    private void RpcInvTransferTransform(Transform transform)
-    {
-        if (player_Inventory.selectedItem == null)
-            return;
-
-        player_Inventory.selectedItem.transform.SetParent(transform, false);
-    }
-
-    [ObserversRpc]
-    private void RpcTriggerAim_Rifle()
-    {
-        animator.SetTrigger("Rifle");
-    }
-
-    [ObserversRpc]
-    private void RpcTriggerAim_Pistol()
-    {
-        animator.SetTrigger("Pistol");
-    }
-
-    [ObserversRpc]
-    private void RpcTriggerAim_RifleAim()
-    {
-        animator.SetTrigger("RifleAim");
-    }
-
-    [ObserversRpc]
-    private void RpcTriggerAim_PistolAim()
-    {
-        animator.SetTrigger("PistolAim");
-    }
-
 
 }
 

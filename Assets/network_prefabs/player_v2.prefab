@@ -2688,6 +2688,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7683183865667525214}
+  - component: {fileID: 9020519159135246185}
   m_Layer: 0
   m_Name: primary_slot
   m_TagString: Untagged
@@ -2711,6 +2712,29 @@ Transform:
   - {fileID: 8839664582265993677}
   m_Father: {fileID: 601356692825690007}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9020519159135246185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4277213391741823221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5681fe548eb84304ea28a286062791f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _networkRules: {fileID: 0}
+  _visitiblityRules: {fileID: 0}
+  _isSetup: 0
+  _prefabId: -2147483648
+  _hasPrefabScope: 0
+  _prefabScope: 0
+  _componentIndex: -2147483648
+  _shouldBePooled: 0
+  _parent: {fileID: 0}
+  _invertedPathToNearestParent: 
+  _directChildren: []
 --- !u!1 &4399113009279209101
 GameObject:
   m_ObjectHideFlags: 0
@@ -3008,6 +3032,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6618783817745346645}
+  - component: {fileID: 3808751795897006953}
   m_Layer: 0
   m_Name: secondary_slot
   m_TagString: Untagged
@@ -3030,6 +3055,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3781150368430769385}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3808751795897006953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5123713279672309296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5681fe548eb84304ea28a286062791f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _networkRules: {fileID: 0}
+  _visitiblityRules: {fileID: 0}
+  _isSetup: 0
+  _prefabId: -2147483648
+  _hasPrefabScope: 0
+  _prefabScope: 0
+  _componentIndex: -2147483648
+  _shouldBePooled: 0
+  _parent: {fileID: 0}
+  _invertedPathToNearestParent: 
+  _directChildren: []
 --- !u!1 &5326734341187003640
 GameObject:
   m_ObjectHideFlags: 0
@@ -4628,6 +4676,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 492814287062135713}
+  - component: {fileID: 296862079797947695}
   m_Layer: 0
   m_Name: rifle_slot
   m_TagString: Untagged
@@ -4651,6 +4700,29 @@ Transform:
   - {fileID: 5005948507274397535}
   m_Father: {fileID: 7330534861003406963}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &296862079797947695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7225396112597334303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5681fe548eb84304ea28a286062791f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _networkRules: {fileID: 0}
+  _visitiblityRules: {fileID: 0}
+  _isSetup: 0
+  _prefabId: -2147483648
+  _hasPrefabScope: 0
+  _prefabScope: 0
+  _componentIndex: -2147483648
+  _shouldBePooled: 0
+  _parent: {fileID: 0}
+  _invertedPathToNearestParent: 
+  _directChildren: []
 --- !u!1 &7293994847640602320
 GameObject:
   m_ObjectHideFlags: 0
@@ -5305,6 +5377,7 @@ GameObject:
   - component: {fileID: 7883536158825165211}
   - component: {fileID: 9022886105587569582}
   - component: {fileID: 5079275850808714052}
+  - component: {fileID: 2706205104373605760}
   m_Layer: 0
   m_Name: player_v2
   m_TagString: Untagged
@@ -5648,6 +5721,29 @@ MonoBehaviour:
   _ownerAuth: 1
   _autoSyncParameters: 1
   _dontSyncParameters: []
+--- !u!114 &2706205104373605760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8698589144985593415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5681fe548eb84304ea28a286062791f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _networkRules: {fileID: 0}
+  _visitiblityRules: {fileID: 0}
+  _isSetup: 0
+  _prefabId: -2147483648
+  _hasPrefabScope: 0
+  _prefabScope: 0
+  _componentIndex: -2147483648
+  _shouldBePooled: 0
+  _parent: {fileID: 0}
+  _invertedPathToNearestParent: 
+  _directChildren: []
 --- !u!1 &8925487558811567795
 GameObject:
   m_ObjectHideFlags: 0
@@ -5688,6 +5784,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1418987181847791985}
+  - component: {fileID: 5143747850715918113}
   m_Layer: 0
   m_Name: pistol_slot
   m_TagString: Untagged
@@ -5710,6 +5807,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7855696241961400823}
   m_LocalEulerAnglesHint: {x: -13.38, y: -66.112, z: -105.835}
+--- !u!114 &5143747850715918113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8948693824392043462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5681fe548eb84304ea28a286062791f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _networkRules: {fileID: 0}
+  _visitiblityRules: {fileID: 0}
+  _isSetup: 0
+  _prefabId: -2147483648
+  _hasPrefabScope: 0
+  _prefabScope: 0
+  _componentIndex: -2147483648
+  _shouldBePooled: 0
+  _parent: {fileID: 0}
+  _invertedPathToNearestParent: 
+  _directChildren: []
 --- !u!1 &9215169218718128947
 GameObject:
   m_ObjectHideFlags: 0
