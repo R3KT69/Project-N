@@ -11,6 +11,7 @@ public class Player_inventory : NetworkBehaviour
     public Player_action player_Action;
     public GameObject empty_hand;
     public Transform throw_item;
+     
 
     
     
@@ -28,6 +29,15 @@ public class Player_inventory : NetworkBehaviour
 
         
         
+    }
+
+    public void DrawHotbar()
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            player_Action.player_canvas.hotbarslots[i].text = $"{Hotbar[i].item_name}";
+            
+        }
     }
 
     public bool isHotbarFull()
@@ -91,6 +101,8 @@ public class Player_inventory : NetworkBehaviour
 
         if (!isOwner) return;
 
+        DrawHotbar();
+
         Debug.Log(isHotbarFull());
 
         if (!player_Action.isHolding)
@@ -125,6 +137,7 @@ public class Player_inventory : NetworkBehaviour
                 RpcSelectedItem(5);
                 //SelectItem();
             }
+            /*
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 if (selectedItem != null)
@@ -137,7 +150,7 @@ public class Player_inventory : NetworkBehaviour
                     
                 }
                 
-            }
+            }*/
             if (Input.GetKeyDown(KeyCode.U))
             {
                 Debug.Log($"Empty hotbar: {GetEmptyHandIndex()}");

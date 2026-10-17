@@ -25,6 +25,7 @@ public class Player_action : NetworkBehaviour
     private bool isLooking = false;
     private string lookAt;
     public GameObject lookAtObj;
+    public Player_hud player_canvas;
 
     void Start()
     {
@@ -48,6 +49,12 @@ public class Player_action : NetworkBehaviour
         {
             player_Camera = gameObject.GetComponent<Player_camera>();
         }
+        if (player_canvas == null)
+        {
+            player_canvas = gameObject.GetComponentInChildren<Player_hud>();
+        }
+
+        
    
        
     }
@@ -103,7 +110,13 @@ public class Player_action : NetworkBehaviour
                 Debug.Log("Hit: " + hit.collider.name);
                 lookAtObj = hit.collider.gameObject;
                 lookAt = lookAtObj.GetComponent<Item>().item_name;
+
+                player_canvas.lookAtText.text = $"looking at: {lookAt}";
+
                 selected_color = Color.green;
+            } else
+            {
+                player_canvas.lookAtText.text = $"looking at: none";
             }
         }
 
